@@ -9,12 +9,11 @@
 import UIKit
 
 class MainTableViewController: UITableViewController {
-    
-    var data = ["sample1", "sample2", "sample3", "sample4", "sample5", "sample6", "sample7", "sample8"]
+    var menuItems = ["All", "Unread", "Saved"]
+    var topics = ["Tech", "Sport", "Science", "Music", "Bussiness", "Entertainment", "Lifestyle", "News"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -38,30 +37,50 @@ class MainTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 3
+            return menuItems.count
         }
         
         else {
-            return data.count
+            return topics.count
         }
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("sampleCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("mainCell", forIndexPath: indexPath)
 
-        cell.textLabel?.text = data[indexPath.row]
+        if indexPath.section == 0 {
+            cell.textLabel?.text = menuItems[indexPath.row]
+            
+            let random = Int(arc4random_uniform(120) + 1)
+            cell.detailTextLabel?.text = String(random)
+        }
+        
+        if indexPath.section == 1 {
+            cell.textLabel?.text = topics[indexPath.row]
+            
+            let random = Int(arc4random_uniform(120) + 1)
+            cell.detailTextLabel?.text = String(random)
+        }
 
         return cell
     }
     
     override func tableView(tableView: UITableView,
                    titleForHeaderInSection section: Int) -> String? {
-        return "Section \(section + 1)"
+        if section == 0 {
+            return "Menu"
+        }
+        
+        if section == 1 {
+            return "Topics"
+        }
+        
+        return nil
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10.00
+        return 8.00
     }
 
     /*
@@ -107,13 +126,22 @@ class MainTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        let destinationVC = segue.destinationViewController as UIViewController
+        let destinationViewController = segue.destinationViewController as UIViewController
         
         // Get the cell that generated this segue.
         if let selectedCell = sender as? UITableViewCell {
             let indexPath = tableView.indexPathForCell(selectedCell)!
-            let selectedItem = data[indexPath.row]
-            destinationVC.navigationItem.title = selectedItem
+            
+            var selectedItem: String?
+            if indexPath.section == 0 {
+                selectedItem = menuItems[indexPath.row]
+            }
+            
+            if indexPath.section == 1 {
+                selectedItem = topics[indexPath.row]
+            }
+            
+            destinationViewController.navigationItem.title = selectedItem
         }
     }
  

@@ -40,7 +40,7 @@ class ListTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("secondSampleCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("listCell", forIndexPath: indexPath)
 
         cell.textLabel?.text = data[indexPath.row]
         
