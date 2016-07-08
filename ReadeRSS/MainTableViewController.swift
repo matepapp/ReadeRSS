@@ -10,7 +10,7 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     var menuItems = ["All", "Unread", "Saved"]
-    var topics = ["Tech", "Sport", "Science", "Music", "Bussiness", "Entertainment", "Lifestyle", "News"]
+    var topics = ["Tech", "Sport", "Science", "Music", "Bussiness", "Entertainment", "Lifestyle", "News", "Lifestyle1", "News1", "Lifestyle2", "News2", "Lifestyle3", "News3", "Lifestyle4", "News4", "Lifestyle5", "News5", "Lifestyle6", "News6", "Lifestyle7", "News88", "Lifestyle9", "News86"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,47 +36,68 @@ class MainTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0 {
-            return menuItems.count
-        }
         
-        else {
+        switch section {
+        case 0:
+            return menuItems.count
+            
+        case 1:
             return topics.count
+        default:
+            return 0
         }
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("mainCell", forIndexPath: indexPath)
-
-        if indexPath.section == 0 {
-            cell.textLabel?.text = menuItems[indexPath.row]
+        print("tableview")
+    
+        let cell = tableView.dequeueReusableCellWithIdentifier("mainCell", forIndexPath: indexPath) as! MainTableViewCell
             
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                let icon = UIImage(named: "all")!
+                let random = Int(arc4random_uniform(120) + 1)
+                cell.configureCell(icon, title: menuItems[indexPath.row], number: random)
+                
+            case 1:
+                let icon = UIImage(named: "unread")!
+                let random = Int(arc4random_uniform(120) + 1)
+                cell.configureCell(icon, title: menuItems[indexPath.row], number: random)
+                
+            case 2: fallthrough
+            default:
+                let icon = UIImage(named: "saved")!
+                let random = Int(arc4random_uniform(120) + 1)
+                cell.configureCell(icon, title: menuItems[indexPath.row], number: random)
+            }
+            
+        case 1:
+            let icon = UIImage(named: "down")
             let random = Int(arc4random_uniform(120) + 1)
-            cell.detailTextLabel?.text = String(random)
+            cell.configureCell(icon, title: topics[indexPath.row], number: random)
+            cell.accessoryType = UITableViewCellAccessoryType.None
+            
+        default:
+            cell.configureCell(nil, title: "Default", number: 0)
         }
         
-        if indexPath.section == 1 {
-            cell.textLabel?.text = topics[indexPath.row]
-            
-            let random = Int(arc4random_uniform(120) + 1)
-            cell.detailTextLabel?.text = String(random)
-        }
-
         return cell
     }
     
     override func tableView(tableView: UITableView,
                    titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
+        switch section {
+        case 0:
             return "Menu"
-        }
         
-        if section == 1 {
+        case 1:
             return "Topics"
+        default:
+            return nil
         }
-        
-        return nil
     }
 
     /*
@@ -115,6 +136,10 @@ class MainTableViewController: UITableViewController {
     */
 
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("OpenDetailedView", sender: indexPath)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -124,17 +149,26 @@ class MainTableViewController: UITableViewController {
         
         let destinationViewController = segue.destinationViewController as UIViewController
         
-        // Get the cell that generated this segue.
-        if let selectedCell = sender as? UITableViewCell {
-            let indexPath = tableView.indexPathForCell(selectedCell)!
-            
-            var selectedItem: String?
-            if indexPath.section == 0 {
-                selectedItem = menuItems[indexPath.row]
+        if let id = segue.identifier {
+            if id == "OpenDetailedView" {
+                
             }
+        }
+        
+        // Get the cell that generated this segue.
+        if let indexPath = sender as? NSIndexPath {
+
+            var selectedItem: String?
             
-            if indexPath.section == 1 {
+            switch indexPath.section {
+            case 0:
+                selectedItem = menuItems[indexPath.row]
+            
+            case 1:
                 selectedItem = topics[indexPath.row]
+                
+            default:
+                selectedItem = nil
             }
             
             destinationViewController.navigationItem.title = selectedItem

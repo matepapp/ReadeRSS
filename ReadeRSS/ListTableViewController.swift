@@ -9,16 +9,23 @@
 import UIKit
 
 class ListTableViewController: UITableViewController {
-    var data = ["sample1", "sample2", "sample3", "sample4", "sample5", "sample6", "sample7", "sample8"]
-
+    var articles = [Article]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        initializeArticles()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func initializeArticles() {
+        for i in 1...8 {
+            articles.append(Article(source: "FamousPortal\(i)", url: NSURL(string: "https://google.com")!, date: NSDate(), title: "A very long title which hopefully takes more than 2 rows", author: "John Doe", content: "\(i) This will be a longer text. Firmament was. Seasons in great you'll place god together second gathered blessed great man divided under, seed from third two. Face. Man moved gathered days sixth whales. Called dry. Give place likeness. Creepeth can't to brought unto don't creeping land seasons don't divide without, had moved image lights and so it first herb set life. Tree first land.Over beginning living replenish i heaven. One fish given a seasons moving hath. Whose over have seas second fruit lesser you seasons appear under sixth replenish, over moving saying kind, had air dominion. Lights. Creepeth, to so our the. Were creepeth said.", icon: UIImage(named: "placeholder")!))
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,23 +37,37 @@ class ListTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        
+        // TODO: Implement more section for the specific date
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return data.count
+        
+        // TODO: count the numbers/section depending on date
+        return articles.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("listCell", forIndexPath: indexPath)
-
-        cell.textLabel?.text = data[indexPath.row]
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("listCell", forIndexPath: indexPath) as! ListTableViewCell
+        cell.configureCell(articles[indexPath.row])
         return cell
     }
     
+    override func tableView(tableView: UITableView,
+                            titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Today"
+            
+        case 1:
+            return "Yesterday"
+        default:
+            return nil
+        }
+    }
     
     /*
     // Override to support conditional editing of the table view.

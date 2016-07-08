@@ -9,7 +9,10 @@
 import UIKit
 
 class MainTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var iconImg: UIImageView!
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var counterLbl: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,8 +20,13 @@ class MainTableViewCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    // Configure the custom cell
+    func configureCell(icon: UIImage?, title: String, number: Int) {
+        iconImg.image = icon ?? UIImage(named: "all")
+        titleLbl.text = title
+        counterLbl.text = String(number)
     }
 
 }

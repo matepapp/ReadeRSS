@@ -7,21 +7,25 @@
 //
 
 import Foundation
+import UIKit
 
 class Article: NSObject {
-    var url: String
+    var source: String
+    var url: NSURL
     var date: NSDate
     var title: String
     var author: String
     var content: String
-    //var photo: UIImage
+    var icon: UIImage
     
-    init(url: String, date: NSDate, title: String, author: String, content: String) {
+    init(source: String, url: NSURL, date: NSDate, title: String, author: String, content: String, icon: UIImage) {
+        self.source = source
         self.url = url
         self.date = date
         self.title = title
         self.author = author
         self.content = content
+        self.icon = icon
     }
     
 }
