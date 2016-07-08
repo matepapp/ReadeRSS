@@ -33,7 +33,6 @@ class ListTableViewCell: UITableViewCell {
         
         titleLbl.text = article.title
         subtitleLbl.text = article.content
-    
     }
     
     // Configure a cell with the needed properties

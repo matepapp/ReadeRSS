@@ -10,10 +10,13 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     var menuItems = ["All", "Unread", "Saved"]
-    var topics = ["Tech", "Sport", "Science", "Music", "Bussiness", "Entertainment", "Lifestyle", "News", "Lifestyle1", "News1", "Lifestyle2", "News2", "Lifestyle3", "News3", "Lifestyle4", "News4", "Lifestyle5", "News5", "Lifestyle6", "News6", "Lifestyle7", "News88", "Lifestyle9", "News86"]
+    var topics = ["Tech", "Sport", "Science", "Music", "Bussiness", "Entertainment", "Lifestyle", "News"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Remove the text from the back button
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,8 +55,10 @@ class MainTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         print("tableview")
     
+        // Reuse the cells with the identifier mainCell
         let cell = tableView.dequeueReusableCellWithIdentifier("mainCell", forIndexPath: indexPath) as! MainTableViewCell
-            
+        
+        // Initialize the cells in the first section
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -74,6 +79,7 @@ class MainTableViewController: UITableViewController {
                 cell.configureCell(icon, title: menuItems[indexPath.row], number: random)
             }
             
+        // Initialize the second section's topics
         case 1:
             let icon = UIImage(named: "down")
             let random = Int(arc4random_uniform(120) + 1)
@@ -149,13 +155,7 @@ class MainTableViewController: UITableViewController {
         
         let destinationViewController = segue.destinationViewController as UIViewController
         
-        if let id = segue.identifier {
-            if id == "OpenDetailedView" {
-                
-            }
-        }
-        
-        // Get the cell that generated this segue.
+        // Get the index that generated this segue.
         if let indexPath = sender as? NSIndexPath {
 
             var selectedItem: String?
@@ -171,9 +171,9 @@ class MainTableViewController: UITableViewController {
                 selectedItem = nil
             }
             
+            // Set the title of the destinationViewController to the selected cell's title
             destinationViewController.navigationItem.title = selectedItem
         }
     }
  
-
 }
