@@ -78,10 +78,6 @@ class MainTableViewController: UITableViewController {
         
         return nil
     }
-    
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 8.00
-    }
 
     /*
     // Override to support conditional editing of the table view.
