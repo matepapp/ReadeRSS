@@ -34,14 +34,5 @@ class ListTableViewCell: UITableViewCell {
         titleLbl.text = article.title
         subtitleLbl.text = article.content
     }
-    
-    // Configure a cell with the needed properties
-    func configureCell(icon: UIImage, source: String, time: String, title: String, subtitle: String) {
-        sourceIconImg.image = icon
-        sourceLbl.text = source
-        timeLbl.text = time
-        titleLbl.text = title
-        subtitleLbl.text = subtitle
-    }
 
 }
