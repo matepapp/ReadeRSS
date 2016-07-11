@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E004FB423E7E2272D36462B /* Pods_ReadeRSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58E44E08DA7F1DC8017C308 /* Pods_ReadeRSS.framework */; };
 		4223912B1D2E83350071BCD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4223912A1D2E83350071BCD7 /* AppDelegate.swift */; };
 		422391301D2E83350071BCD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4223912E1D2E83350071BCD7 /* Main.storyboard */; };
 		422391321D2E83350071BCD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 422391311D2E83350071BCD7 /* Assets.xcassets */; };
@@ -34,6 +35,9 @@
 		422391471D2E94EF0071BCD7 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		422391491D2FA7E80071BCD7 /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		4223914B1D2FC8370071BCD7 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		A58E44E08DA7F1DC8017C308 /* Pods_ReadeRSS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadeRSS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD8F73AC1F2D56C4356B3274 /* Pods-ReadeRSS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadeRSS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReadeRSS/Pods-ReadeRSS.debug.xcconfig"; sourceTree = "<group>"; };
+		C20475FE1A02F1870D96E4CE /* Pods-ReadeRSS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadeRSS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReadeRSS/Pods-ReadeRSS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +45,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E004FB423E7E2272D36462B /* Pods_ReadeRSS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A79FAB18E3E55E00C3D8059 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A58E44E08DA7F1DC8017C308 /* Pods_ReadeRSS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4223911E1D2E83350071BCD7 = {
 			isa = PBXGroup;
 			children = (
 				422391291D2E83350071BCD7 /* ReadeRSS */,
 				422391281D2E83350071BCD7 /* Products */,
+				EC77E35A3D04CBD4F5B5F613 /* Pods */,
+				2A79FAB18E3E55E00C3D8059 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +121,15 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		EC77E35A3D04CBD4F5B5F613 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AD8F73AC1F2D56C4356B3274 /* Pods-ReadeRSS.debug.xcconfig */,
+				C20475FE1A02F1870D96E4CE /* Pods-ReadeRSS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,9 +137,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 422391391D2E83350071BCD7 /* Build configuration list for PBXNativeTarget "ReadeRSS" */;
 			buildPhases = (
+				720073CE95B79E7EE6C34B98 /* [CP] Check Pods Manifest.lock */,
 				422391231D2E83350071BCD7 /* Sources */,
 				422391241D2E83350071BCD7 /* Frameworks */,
 				422391251D2E83350071BCD7 /* Resources */,
+				1AE6BC949E3A7932D17E56AC /* [CP] Embed Pods Frameworks */,
+				491071100E77433D9427F4A7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -171,6 +198,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AE6BC949E3A7932D17E56AC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReadeRSS/Pods-ReadeRSS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		491071100E77433D9427F4A7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReadeRSS/Pods-ReadeRSS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		720073CE95B79E7EE6C34B98 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		422391231D2E83350071BCD7 /* Sources */ = {
@@ -295,6 +370,7 @@
 		};
 		4223913A1D2E83350071BCD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD8F73AC1F2D56C4356B3274 /* Pods-ReadeRSS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReadeRSS/Info.plist;
@@ -306,6 +382,7 @@
 		};
 		4223913B1D2E83350071BCD7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C20475FE1A02F1870D96E4CE /* Pods-ReadeRSS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReadeRSS/Info.plist;
