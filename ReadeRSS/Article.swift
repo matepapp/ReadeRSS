@@ -17,8 +17,9 @@ class Article: NSObject {
     var author: String
     var content: String
     var icon: UIImage
+    var image: UIImage
     
-    init(source: String, url: NSURL, date: NSDate, title: String, author: String, content: String, icon: UIImage) {
+    init(source: String, url: NSURL, date: NSDate, title: String, author: String, content: String, icon: UIImage, image: UIImage) {
         self.source = source
         self.url = url
         self.date = date
@@ -26,6 +27,7 @@ class Article: NSObject {
         self.author = author
         self.content = content
         self.icon = icon
+        self.image = image
     }
     
 }

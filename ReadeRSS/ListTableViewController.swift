@@ -15,6 +15,10 @@ class ListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         initializeArticles()
+        
+        // Remove the text from the back button
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -24,7 +28,7 @@ class ListTableViewController: UITableViewController {
     
     func initializeArticles() {
         for i in 1...8 {
-            articles.append(Article(source: "FamousPortal\(i)", url: NSURL(string: "https://google.com")!, date: NSDate(), title: "A very long title which hopefully takes more than 2 rows", author: "John Doe", content: "\(i) This will be a longer text. Firmament was. Seasons in great you'll place god together second gathered blessed great man divided under, seed from third two. Face. Man moved gathered days sixth whales. Called dry. Give place likeness. Creepeth can't to brought unto don't creeping land seasons don't divide without, had moved image lights and so it first herb set life. Tree first land.Over beginning living replenish i heaven. One fish given a seasons moving hath. Whose over have seas second fruit lesser you seasons appear under sixth replenish, over moving saying kind, had air dominion. Lights. Creepeth, to so our the. Were creepeth said.", icon: UIImage(named: "placeholder")!))
+            articles.append(Article(source: "TheNextWeb\(i)", url: NSURL(string: "https://google.com")!, date: NSDate(), title: "Google speeds past Apple in the race to train mobile app devs in India", author: "ABHIMANYU GHOSHAL", content: "In the next two years, India is slated to have the largest population of software developers in the world, at four million professionals in the industry. To that end, it’s important for companies to get in on the ground floor and capture as large a share of that focus as possible. That’s why Google has launched its Android Skilling program in the country, with a view to train two million devs in the next three years. The program includes integrating Android development into university curricula through the government’s National Skill Development Corporation of India, as well as offering an exam for globally recognized certification – priced at Rs. 6,500 ($97) that should make it easier for students to land jobs in the software sector. The company also partnered with online learning firm Udacity to offer Android nanodegrees, including a full-fledged one last year and another for beginners last month. In addition, it will make its Android Developer Fundamentals courseware open source and publicly available for free later this year. With that, Google is set to zoom past Apple in the race to build a large developer base for its mobile platform in India. In May, Apple announced that it will open a new facility in the city of Bangalore sometime in 2017 to enhance iOS designers and developers’ understanding and capabilities. Unlike Google’s program, which is set to kick off this year, Apple’s initiative is still a while away and doesn’t offer end-to-end training for would-be iOS devs. There’s a lot more scope for Google to win this race, as students won’t need iOS devices or Macs to train on and hone their skills; they can start with cheaper gear like inexpensive Android smartphones and Windows or Linux-based PCs. Plus, with training available as part of university curricul, it’s easier to begin learning to code Android software than take up lessons after school hours and on top of one’s existing course load.", icon: UIImage(named: "tnw")!, image: UIImage(named: "article1")!))
         }
     }
 
@@ -104,14 +108,20 @@ class ListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "ArticleView" {
+            let destinationViewController = segue.destinationViewController as! ArticleViewController
+            
+            let indexPath = self.tableView.indexPathForSelectedRow
+            destinationViewController.initializeArticle(articles[indexPath!.row])
+        }
     }
-    */
 
 }
