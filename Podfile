@@ -8,4 +8,5 @@ use_frameworks!
 
 # Pods for ReadeRSS
 pod 'Alamofire', '~> 3.0'
+pod 'AlamofireRSSParser', '~> 1.0'
 end

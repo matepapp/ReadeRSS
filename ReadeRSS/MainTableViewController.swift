@@ -157,7 +157,6 @@ class MainTableViewController: UITableViewController {
         
         // Get the index that generated this segue.
         if let indexPath = sender as? NSIndexPath {
-
             var selectedItem: String?
             
             switch indexPath.section {

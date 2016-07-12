@@ -119,8 +119,10 @@ class ListTableViewController: UITableViewController {
         if segue.identifier == "ArticleView" {
             let destinationViewController = segue.destinationViewController as! ArticleViewController
             
-            let indexPath = self.tableView.indexPathForSelectedRow
-            destinationViewController.initializeArticle(articles[indexPath!.row])
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                destinationViewController.initializeArticle(articles[indexPath.row])
+            }
+            
         }
     }
 
