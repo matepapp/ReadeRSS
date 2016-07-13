@@ -11,12 +11,16 @@ import UIKit
 class MainTableViewController: UITableViewController {
     var menuItems = ["All", "Unread", "Saved"]
     var topics = ["Tech", "Sport", "Science", "Music", "Bussiness", "Entertainment", "Lifestyle", "News"]
+    var feeds = [Feed]()
+    var urls = [NSURL]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Remove the text from the back button
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
+        initializeFeeds()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,6 +32,35 @@ class MainTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func handleFeed(optionalFeed: Feed) {
+        self.feeds.append(optionalFeed)
+    }
+    
+    func initializeFeeds() {
+        // Setup loading screen.
+        
+        
+        urls.append(NSURL(string: "http://rss.cnn.com/rss/edition.rss")!)
+        
+        for url in urls {
+            // TODO: Error handling
+            let XMLParserObject = XMLParser()
+            XMLParserObject.parse(url, handler: { (feedOptional: Feed?) in
+                if let feed = feedOptional {
+                    // We have the data.
+                    // Handle data.
+                    self.handleFeed(feed)
+                    
+                    // Setup normal state.
+                    self.tableView.reloadData()
+                    
+                } else {
+                    // Error happened.
+                }
+            })
+        }
     }
 
     // MARK: - Table view data source
@@ -142,10 +175,6 @@ class MainTableViewController: UITableViewController {
     */
 
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("OpenDetailedView", sender: indexPath)
-    }
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -153,26 +182,31 @@ class MainTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        let destinationViewController = segue.destinationViewController as UIViewController
-        
-        // Get the index that generated this segue.
-        if let indexPath = sender as? NSIndexPath {
-            var selectedItem: String?
-            
-            switch indexPath.section {
-            case 0:
-                selectedItem = menuItems[indexPath.row]
-            
-            case 1:
-                selectedItem = topics[indexPath.row]
+        if segue.identifier == "ListTableView" {
+            let destinationViewController = segue.destinationViewController as! ListTableViewController
+            // Get the index that generated this segue.
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                var selectedItem: Feed?
                 
-            default:
-                selectedItem = nil
+//                switch indexPath.section {
+//                case 0:
+//                    selectedItem = menuItems[indexPath.row]
+//                    
+//                case 1:
+//                    selectedItem = topics[indexPath.row]
+//                    
+//                default:
+//                    selectedItem = nil
+//                }
+                
+                selectedItem = feeds[0]
+                
+                // Set the title of the destinationViewController to the selected cell's title
+                destinationViewController.navigationItem.title = selectedItem!.name
+                destinationViewController.feed = selectedItem!
             }
-            
-            // Set the title of the destinationViewController to the selected cell's title
-            destinationViewController.navigationItem.title = selectedItem
         }
+
     }
  
 }

@@ -53,12 +53,14 @@ public class RSSItem: CustomStringConvertible {
         
         do {
             let regex = try NSRegularExpression(pattern: "(https?)\\S*(png|jpg|jpeg|gif)", options: [NSRegularExpressionOptions.CaseInsensitive])
-        
-            regex.enumerateMatchesInString(htmlString, options: [NSMatchingOptions.ReportProgress], range: NSMakeRange(0, htmlString.characters.count)) { (result, flags, stop) -> Void in
+            
+            let block: (NSTextCheckingResult?, NSMatchingFlags, UnsafeMutablePointer<ObjCBool>) -> Void = { (result, flags, stop) -> Void in
                 if let range = result?.range {
                     images.append(htmlNSString.substringWithRange(range))  //because Swift ranges are still completely ridiculous
                 }
             }
+            
+            regex.enumerateMatchesInString(htmlString, options: [NSMatchingOptions.ReportProgress], range: NSMakeRange(0, htmlString.characters.count), usingBlock: block)
         }
         
         catch {

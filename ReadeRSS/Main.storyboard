@@ -66,6 +66,7 @@
                                     <outlet property="counterLbl" destination="pGN-b6-4le" id="yo7-nE-j4T"/>
                                     <outlet property="iconImg" destination="Po6-GI-4CV" id="C8b-Dz-3ST"/>
                                     <outlet property="titleLbl" destination="p2o-SS-WuR" id="ESw-bQ-7eK"/>
+                                    <segue destination="m8D-KQ-b32" kind="show" identifier="ListTableView" id="Ldw-JE-eGH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -82,16 +83,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Profile"/>
                                 <connections>
-                                    <segue destination="sbt-5D-I87" kind="show" id="er5-0y-H8C"/>
+                                    <segue destination="sbt-5D-I87" kind="show" identifier="ProfilView" id="er5-0y-H8C"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="dg0-WD-xOd"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <segue destination="m8D-KQ-b32" kind="show" identifier="OpenDetailedView" id="QO7-g8-Qbz"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="erN-3Z-t7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
