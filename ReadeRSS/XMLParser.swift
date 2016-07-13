@@ -16,10 +16,12 @@ class XMLParser {
     func parse(url: NSURL, handler: (Feed?) -> Void) {
         print("function - start")
         
+        
         // A GET request to the specified URL
         Alamofire.request(.GET, url).responseRSS() { (response) -> Void in
             
             print("callback - start")
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             // If we get a valid RSSFeed object from the response
             if let rssfeed: RSSFeed = response.result.value {
                 self.feed!.setFeed(rssfeed.title!, link: NSURL(string: rssfeed.link!)!, desc: rssfeed.description)
@@ -38,6 +40,7 @@ class XMLParser {
             handler(self.feed)
             
             print("callback - end")
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         
         print("function - return")

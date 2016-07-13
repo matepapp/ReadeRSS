@@ -403,7 +403,6 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NTI-Z1-L9p">
                                         <rect key="frame" x="0.0" y="116" width="375" height="200"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="375" id="i7H-Z1-cQ6"/>
                                             <constraint firstAttribute="height" constant="200" id="wrC-sE-ytx"/>
                                         </constraints>
                                     </imageView>

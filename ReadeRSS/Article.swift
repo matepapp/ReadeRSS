@@ -29,5 +29,4 @@ class Article: NSObject {
         self.icon = icon ?? UIImage(named: "placeholder_icon")
         self.image = image ?? UIImage(named: "placeholder_img")
     }
-    
 }

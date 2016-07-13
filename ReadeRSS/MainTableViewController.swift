@@ -42,7 +42,7 @@ class MainTableViewController: UITableViewController {
         // Setup loading screen.
         
         
-        urls.append(NSURL(string: "http://rss.cnn.com/rss/edition.rss")!)
+        urls.append(NSURL(string: "https://www.theguardian.com/world/rss")!)
         
         for url in urls {
             // TODO: Error handling
