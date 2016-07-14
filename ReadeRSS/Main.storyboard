@@ -18,7 +18,7 @@
                         <color key="separatorColor" red="0.82841801643371582" green="0.82839322090148926" blue="0.82840728759765625" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="mainCell" id="UC2-rB-oAD" customClass="MainTableViewCell" customModule="ReadeRSS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UC2-rB-oAD" id="hAf-hD-1K8">
                                     <rect key="frame" x="0.0" y="0.0" width="342" height="48"/>
@@ -275,7 +275,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" rowHeight="133" id="Az2-Bp-Hvl" customClass="ListTableViewCell" customModule="ReadeRSS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="375" height="133"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Az2-Bp-Hvl" id="ctA-kH-jTz">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="133"/>
