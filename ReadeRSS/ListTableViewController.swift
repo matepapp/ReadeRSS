@@ -32,7 +32,11 @@ class ListTableViewController: UITableViewController {
         // Initialize a calendar instance
         let calendar = NSCalendar.currentCalendar()
         
-        for article in feed.articles {
+        let orderedFeedArticles = feed.articles.sort { (a, b) -> Bool in
+            return a.date.compare(b.date) == NSComparisonResult.OrderedDescending
+        }
+        
+        for article in orderedFeedArticles {
             // Flag boolean variable to show if we added an article to a section
             var flag: Bool = false
             
