@@ -70,6 +70,16 @@ class ListTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        showArticle()
+        let articleVC = ArticleSafariViewController(URL: feed.articles[indexPath.row].url, entersReaderIfAvailable: true)
+        self.presentViewController(articleVC, animated: true, completion: nil)
+    }
+    
+    
+    func showArticle(url: NSURL) {
+
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -108,18 +118,12 @@ class ListTableViewController: UITableViewController {
     
     // MARK: - Navigation
 
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        if segue.identifier == "ArticleView" {
-            let destinationViewController = segue.destinationViewController as! ArticleViewController
-            
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                destinationViewController.initializeArticle(feed.articles[indexPath.row])
-            }
-        }
-    }
+      // Get the new view controller using segue.destinationViewController.
+      // Pass the selected object to the new view controller.
+
+    } */
 
 }
