@@ -21,6 +21,7 @@
 		4246968E1D363D190061D37E /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4246968D1D363D190061D37E /* XMLParser.swift */; };
 		424696901D36638F0061D37E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4246968F1D36638F0061D37E /* Main.storyboard */; };
 		427B34381D377EC10008765B /* ArticleSafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B34371D377EC10008765B /* ArticleSafariViewController.swift */; };
+		427B343A1D378FD70008765B /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B34391D378FD70008765B /* Section.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		4246968D1D363D190061D37E /* XMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
 		4246968F1D36638F0061D37E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		427B34371D377EC10008765B /* ArticleSafariViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleSafariViewController.swift; sourceTree = "<group>"; };
+		427B34391D378FD70008765B /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		A58E44E08DA7F1DC8017C308 /* Pods_ReadeRSS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReadeRSS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD8F73AC1F2D56C4356B3274 /* Pods-ReadeRSS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadeRSS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReadeRSS/Pods-ReadeRSS.debug.xcconfig"; sourceTree = "<group>"; };
 		C20475FE1A02F1870D96E4CE /* Pods-ReadeRSS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadeRSS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReadeRSS/Pods-ReadeRSS.release.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				422391471D2E94EF0071BCD7 /* Article.swift */,
 				4246968A1D3637F10061D37E /* Feed.swift */,
+				427B34391D378FD70008765B /* Section.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				4246968B1D3637F10061D37E /* Feed.swift in Sources */,
 				4223914C1D2FC8370071BCD7 /* ListTableViewCell.swift in Sources */,
 				422391401D2E85500071BCD7 /* MainTableViewController.swift in Sources */,
+				427B343A1D378FD70008765B /* Section.swift in Sources */,
 				427B34381D377EC10008765B /* ArticleSafariViewController.swift in Sources */,
 				4246968E1D363D190061D37E /* XMLParser.swift in Sources */,
 				422391481D2E94EF0071BCD7 /* Article.swift in Sources */,
