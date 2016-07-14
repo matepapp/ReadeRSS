@@ -21,9 +21,4 @@ class Feed: NSObject {
         self.link = link
         self.desc = desc
     }
-    
-    func addArticle(article: Article) {
-        articles.append(article)
-    }
-    
 }

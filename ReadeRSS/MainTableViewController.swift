@@ -34,15 +34,11 @@ class MainTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func handleFeed(optionalFeed: Feed) {
-        self.feeds.append(optionalFeed)
-    }
-    
     func initializeFeeds() {
         // Setup loading screen.
         
         
-        urls.append(NSURL(string: "http://feeds.reuters.com/Reuters/worldNews")!)
+        urls.append(NSURL(string: "http://imagazin.hu/feed/")!)
         
         for url in urls {
             // TODO: Error handling
@@ -51,7 +47,7 @@ class MainTableViewController: UITableViewController {
                 if let feed = feedOptional {
                     // We have the data.
                     // Handle data.
-                    self.handleFeed(feed)
+                    self.feeds.append(feed)
                     
                     // Setup normal state.
                     self.tableView.reloadData()
@@ -203,7 +199,9 @@ class MainTableViewController: UITableViewController {
                 
                 // Set the title of the destinationViewController to the selected cell's title
                 destinationViewController.navigationItem.title = selectedItem!.name
-                destinationViewController.feed = selectedItem!
+                
+                // Pass the feed to the ListViewController and initialize the Sections with it
+                destinationViewController.initializeSections(selectedItem!)
             }
         }
 

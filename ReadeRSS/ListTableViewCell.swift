@@ -32,7 +32,7 @@ class ListTableViewCell: UITableViewCell {
         timeLbl.text = dateFormatter.stringFromDate(article.date)
         
         titleLbl.text = article.title
-        subtitleLbl.text = article.content
+        subtitleLbl.text = "Placeholder text for the content field"
     }
 
 }

@@ -28,9 +28,9 @@ class XMLParser {
             
                 // Make a new article from RSSItem and add to the feed
                 for item in rssfeed.items {
-                    let article = Article(source: rssfeed.title!, url: NSURL(string: item.link!)!, date: item.pubDate!, title: item.title!, author: item.author, content: item.itemDescription, icon: nil, image: nil)
+                    let article = Article(source: rssfeed.title!, url: NSURL(string: item.link!)!, date: item.pubDate!, title: item.title!, icon: nil)
                     
-                    self.feed!.addArticle(article)
+                    self.feed!.articles.append(article)
                 }
             }
             else {

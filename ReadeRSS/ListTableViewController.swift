@@ -9,14 +9,10 @@
 import UIKit
 
 class ListTableViewController: UITableViewController {
-    var feed = Feed()
     var sections = [Section]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        initializeArticles()
-        print(feed.articles.count)
         
         // Remove the text from the back button
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
@@ -28,7 +24,7 @@ class ListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    func initializeArticles() {
+    func initializeSections(feed: Feed) {
         // Initialize a calendar instance
         let calendar = NSCalendar.currentCalendar()
         
@@ -66,7 +62,7 @@ class ListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        // TODO: count the numbers/section depending on date
+        // Numbers of rows per each section
         return sections[section].articles.count
     }
 
@@ -74,6 +70,7 @@ class ListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("listCell", forIndexPath: indexPath) as! ListTableViewCell
         
+        // Configure the cell with the selected article in the section
         cell.configureCell(sections[indexPath.section].articles[indexPath.row])
         return cell
     }
@@ -84,7 +81,9 @@ class ListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let articleVC = ArticleSafariViewController(URL: feed.articles[indexPath.row].url, entersReaderIfAvailable: true)
+        
+        // Initialize a SafariViewController with the selected row's URL 
+        let articleVC = ArticleSafariViewController(URL: sections[indexPath.section].articles[indexPath.row].url, entersReaderIfAvailable: true)
         self.presentViewController(articleVC, animated: true, completion: nil)
     }
     
