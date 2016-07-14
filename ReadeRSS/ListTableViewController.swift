@@ -10,6 +10,7 @@ import UIKit
 
 class ListTableViewController: UITableViewController {
     var feed = Feed()
+    var sections = [Section]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,59 +28,55 @@ class ListTableViewController: UITableViewController {
     }
     
     func initializeArticles() {
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        let calendar = NSCalendar.currentCalendar()
+        let today = NSDate()
+        let yesterday = calendar.dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: [])
+        
+        sections.append(Section(date: today))
+        sections.append(Section(date: yesterday!))
+            
+        for article in feed.articles {
+            
+            for section in sections {
+                if calendar.isDate(article.date, inSameDayAsDate: section.date) {
+                    section.articles.append(article)
+                }
+            }
+        }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        
-        // TODO: Implement more section for the specific date
-        return 2
+        return sections.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         // TODO: count the numbers/section depending on date
-        return feed.articles.count
+        return sections[section].articles.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("listCell", forIndexPath: indexPath) as! ListTableViewCell
-        cell.configureCell(feed.articles[indexPath.row])
+        
+        cell.configureCell(sections[indexPath.section].articles[indexPath.row])
         return cell
     }
     
     override func tableView(tableView: UITableView,
                             titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "Today"
-            
-        case 1:
-            return "Yesterday"
-        default:
-            return nil
-        }
+        return sections[section].title
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        showArticle()
         let articleVC = ArticleSafariViewController(URL: feed.articles[indexPath.row].url, entersReaderIfAvailable: true)
         self.presentViewController(articleVC, animated: true, completion: nil)
     }
     
-    
-    func showArticle(url: NSURL) {
-
-    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

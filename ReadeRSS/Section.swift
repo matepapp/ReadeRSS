@@ -8,34 +8,18 @@
 
 import Foundation
 
-public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs === rhs || lhs.compare(rhs) == .OrderedSame
-}
-
-public func <(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.compare(rhs) == .OrderedAscending
-}
-
-extension NSDate: Comparable { }
-
 class Section: NSObject {
     var date: NSDate
-    var items: [Article]
+    var articles = [Article]()
     
-    init(date: NSDate, items: [Article]) {
-        self.date = date
-        self.items = items
-    }
-    
-    func title() -> String {
+    var title: String {
         let calendar = NSCalendar.currentCalendar()
-        let today = NSDate()
-        let yesterday = calendar.dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: [])
         
-        if date == today {
+        if calendar.isDateInToday(date) {
             return "Today"
         }
-        else if date == yesterday {
+        
+        if calendar.isDateInYesterday(date) {
             return "Yesterday"
         }
         else {
@@ -45,5 +29,8 @@ class Section: NSObject {
         }
     }
     
-
+    init(date: NSDate) {
+        self.date = date
+    }
+  
 }
