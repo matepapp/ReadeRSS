@@ -31,12 +31,15 @@ class XMLParser {
                     let article = Article(source: rssfeed.title!, url: NSURL(string: item.link!)!, date: item.pubDate!, title: item.title!, icon: nil)
                     
                     self.feed!.articles.append(article)
+                    
                 }
+                
+                print(rssfeed.title)
             }
             else {
                 self.feed = nil
             }
-            
+
             handler(self.feed)
             
             print("callback - end")

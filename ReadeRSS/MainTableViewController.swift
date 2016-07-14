@@ -12,7 +12,7 @@ class MainTableViewController: UITableViewController {
     var menuItems = ["All", "Unread", "Saved"]
     var topics = ["Tech", "Sport", "Science", "Music", "Bussiness", "Entertainment", "Lifestyle", "News"]
     var feeds = [Feed]()
-    var urls = [NSURL]()
+    var urls = [NSURL(string: "http://www.theverge.com/apple/rss/index.xml"), NSURL(string: "http://www.economist.com/rss/"), NSURL(string: "http://techcrunch.com/rssfeeds/"), NSURL(string: "http://lifehacker.com/index.xml"), NSURL(string: "http://imagazin.hu/feed/")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +37,10 @@ class MainTableViewController: UITableViewController {
     func initializeFeeds() {
         // Setup loading screen.
         
-        
-        urls.append(NSURL(string: "http://imagazin.hu/feed/")!)
-        
         for url in urls {
             // TODO: Error handling
             let XMLParserObject = XMLParser()
-            XMLParserObject.parse(url, handler: { (feedOptional: Feed?) in
+            XMLParserObject.parse(url!, handler: { (feedOptional: Feed?) in
                 if let feed = feedOptional {
                     // We have the data.
                     // Handle data.
@@ -195,7 +192,7 @@ class MainTableViewController: UITableViewController {
 //                    selectedItem = nil
 //                }
                 
-                selectedItem = feeds[0]
+                selectedItem = feeds[indexPath.row % urls.count]
                 
                 // Set the title of the destinationViewController to the selected cell's title
                 destinationViewController.navigationItem.title = selectedItem!.name

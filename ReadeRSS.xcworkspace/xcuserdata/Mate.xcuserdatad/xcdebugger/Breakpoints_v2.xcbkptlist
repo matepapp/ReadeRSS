@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReadeRSS/ListTableViewController.swift"
-            timestampString = "490196875.532805"
+            timestampString = "490199358.454484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "initializeArticles(_:)"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "initializeSections(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,13 +26,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReadeRSS/ListTableViewController.swift"
-            timestampString = "490196875.532805"
+            timestampString = "490199358.454484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "initializeArticles(_:)"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "initializeSections(_:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ReadeRSS/MainTableViewController.swift"
+            timestampString = "490199461.684421"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "initializeFeeds()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ReadeRSS.MainTableViewController.initializeFeeds () -&gt; ()"
+                  moduleName = "ReadeRSS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Mate/Library/Mobile%20Documents/com~apple~CloudDocs/Work/XCode/ReadeRSS/ReadeRSS/MainTableViewController.swift"
+                  timestampString = "490200189.325964"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "552">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ReadeRSS.MainTableViewController.(initializeFeeds () -&gt; ()).(closure #1)"
+                  moduleName = "ReadeRSS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Mate/Library/Mobile%20Documents/com~apple~CloudDocs/Work/XCode/ReadeRSS/ReadeRSS/MainTableViewController.swift"
+                  timestampString = "490200189.326147"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
