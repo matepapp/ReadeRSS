@@ -16,6 +16,7 @@ class ListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         initializeArticles()
+        print(feed.articles.count)
         
         // Remove the text from the back button
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
@@ -28,19 +29,25 @@ class ListTableViewController: UITableViewController {
     }
     
     func initializeArticles() {
+        // Initialize a calendar instance
         let calendar = NSCalendar.currentCalendar()
-        let today = NSDate()
-        let yesterday = calendar.dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: [])
         
-        sections.append(Section(date: today))
-        sections.append(Section(date: yesterday!))
-            
         for article in feed.articles {
+            // Flag boolean variable to show if we added an article to a section
+            var flag: Bool = false
             
+            // Iterate through the sections and if the article's day is the same as the section's day put it into that section and set the flag
             for section in sections {
                 if calendar.isDate(article.date, inSameDayAsDate: section.date) {
                     section.articles.append(article)
+                    flag = true
                 }
+            }
+            
+            // After we checked every section and there is no place for the article add a new section with that date
+            if !flag {
+                sections.append(Section(date: article.date))
+                sections.last!.articles.append(article)
             }
         }
     }
