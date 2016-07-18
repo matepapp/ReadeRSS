@@ -12,6 +12,7 @@ class Feed: NSObject {
     var name: String?
     var link: NSURL?
     var desc: String?
+    var category: Category?
     // TODO: icon
     
     var articles: [Article] = [Article]()

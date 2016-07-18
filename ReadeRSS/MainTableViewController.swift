@@ -10,9 +10,9 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     var menuItems = ["All", "Unread", "Saved"]
-    var topics = ["Tech", "Sport", "Science", "Music", "Bussiness", "Entertainment", "Lifestyle", "News"]
+    var topics = Category.allValues
     var feeds = [Feed]()
-    var urls = [NSURL(string: "http://www.theverge.com/apple/rss/index.xml"), NSURL(string: "http://www.economist.com/rss/"), NSURL(string: "http://feeds.feedburner.com/techcrunch"), NSURL(string: "http://lifehacker.com/index.xml"), NSURL(string: "http://imagazin.hu/feed/"), NSURL(string: "http://index.hu/24ora/rss/")]
+    var urls = [NSURL(string: "http://www.theverge.com/apple/rss/index.xml"), NSURL(string: "http://www.economist.com/rss/"), NSURL(string: "http://feeds.feedburner.com/techcrunch"), NSURL(string: "http://lifehacker.com/index.xml"), NSURL(string: "http://imagazin.hu/feed/"), NSURL(string: "http://index.hu/24ora/rss/"), NSURL(string: "https://github.com/matepapp.atom")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,7 @@ class MainTableViewController: UITableViewController {
     
     func initializeFeeds() {
         // Setup loading screen.
+    
         
         for url in urls {
             // TODO: Error handling
@@ -109,7 +110,7 @@ class MainTableViewController: UITableViewController {
         case 1:
             let icon = UIImage(named: "down")
             let random = Int(arc4random_uniform(120) + 1)
-            cell.configureCell(icon, title: topics[indexPath.row], number: random)
+            cell.configureCell(icon, title: "\(topics[indexPath.row])", number: random)
             cell.accessoryType = UITableViewCellAccessoryType.None
             
         default:

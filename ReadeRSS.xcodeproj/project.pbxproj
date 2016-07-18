@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E004FB423E7E2272D36462B /* Pods_ReadeRSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58E44E08DA7F1DC8017C308 /* Pods_ReadeRSS.framework */; };
+		420C30861D3CC3610077E18E /* Categhory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420C30851D3CC3610077E18E /* Categhory.swift */; };
 		4223912B1D2E83350071BCD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4223912A1D2E83350071BCD7 /* AppDelegate.swift */; };
 		422391321D2E83350071BCD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 422391311D2E83350071BCD7 /* Assets.xcassets */; };
 		422391351D2E83350071BCD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 422391331D2E83350071BCD7 /* LaunchScreen.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		420C30851D3CC3610077E18E /* Categhory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categhory.swift; sourceTree = "<group>"; };
 		422391271D2E83350071BCD7 /* ReadeRSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReadeRSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4223912A1D2E83350071BCD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		422391311D2E83350071BCD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				422391471D2E94EF0071BCD7 /* Article.swift */,
 				4246968A1D3637F10061D37E /* Feed.swift */,
 				427B34391D378FD70008765B /* Section.swift */,
+				420C30851D3CC3610077E18E /* Categhory.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				420C30861D3CC3610077E18E /* Categhory.swift in Sources */,
 				422391421D2E85710071BCD7 /* ListTableViewController.swift in Sources */,
 				4246968B1D3637F10061D37E /* Feed.swift in Sources */,
 				4223914C1D2FC8370071BCD7 /* ListTableViewCell.swift in Sources */,
