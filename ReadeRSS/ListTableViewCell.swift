@@ -13,7 +13,6 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var sourceLbl: UILabel!
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var subtitleLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,7 +31,6 @@ class ListTableViewCell: UITableViewCell {
         timeLbl.text = dateFormatter.stringFromDate(article.date)
         
         titleLbl.text = article.title
-        subtitleLbl.text = "Placeholder text for the content field"
     }
 
 }

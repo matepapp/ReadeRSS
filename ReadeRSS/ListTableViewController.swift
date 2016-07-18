@@ -14,6 +14,10 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set the self-sizing cells
+        self.tableView.estimatedRowHeight = 150.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
         // Remove the text from the back button
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
