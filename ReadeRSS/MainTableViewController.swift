@@ -13,6 +13,7 @@ class MainTableViewController: UITableViewController {
     var topics = Category.allValues
     var feeds = [Feed]()
     var urls = [NSURL(string: "http://www.theverge.com/apple/rss/index.xml"), NSURL(string: "http://www.economist.com/rss/"), NSURL(string: "http://feeds.feedburner.com/techcrunch"), NSURL(string: "http://lifehacker.com/index.xml"), NSURL(string: "http://imagazin.hu/feed/"), NSURL(string: "http://index.hu/24ora/rss/"), NSURL(string: "https://github.com/matepapp.atom")]
+    var selectedIndex: NSIndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +32,9 @@ class MainTableViewController: UITableViewController {
     func initializeFeeds() {
         // Setup loading screen.
     
-        
         for url in urls {
             // TODO: Error handling
-            let XMLParserObject = XMLParser()
-            XMLParserObject.parse(url!, handler: { (feedOptional: Feed?) in
+            XMLParser().parse(url!, handler: { (feedOptional: Feed?) in
                 if let feed = feedOptional {
                     // We have the data.
                     // Handle data.
@@ -59,7 +58,6 @@ class MainTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         
         switch section {
         case 0:
@@ -110,7 +108,6 @@ class MainTableViewController: UITableViewController {
         default:
             cell.configureCell(nil, title: "Default", number: 0)
         }
-        
         return cell
     }
     
@@ -125,6 +122,38 @@ class MainTableViewController: UITableViewController {
         default:
             return nil
         }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if selectedIndex == indexPath {
+            // TODO: remove rows because it means to close to topic
+            selectedIndex = nil
+        }
+        
+        if selectedIndex == nil {
+            selectedIndex = indexPath
+            
+            var selectedFeeds = selectFeedsFromCategory(topics[indexPath.row]) ?? [Feed]()
+            
+            var numberOfFeeds = selectedFeeds.count
+            
+            var indexes = [NSIndexPath]()
+            
+            for num in 0 ..< numberOfFeeds {
+                indexes.append(NSIndexPath(forRow: indexPath.row + num, inSection: 1))
+            }
+            
+            tableView.beginUpdates()
+            tableView.insertRowsAtIndexPaths(indexes, withRowAnimation: .Fade)
+            tableView.endUpdates()
+            
+        }
+    }
+    
+    func selectFeedsFromCategory(cat: Category) -> [Feed]? {
+        return feeds.filter({ (feed) -> Bool in
+            return feed.category == cat
+        })
     }
     
     // MARK: - Navigation

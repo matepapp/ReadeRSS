@@ -21,8 +21,12 @@ class XMLParser {
         Alamofire.request(.GET, url).responseRSS() { (response) -> Void in
             
             print("callback - start")
+            // Show a NetworkActivityIndicator
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            
+            
             // If we get a valid RSSFeed object from the response
+            // TODO: Error handling when force unwrapping the values of the feed
             if let rssfeed: RSSFeed = response.result.value {
                 self.feed!.setFeed(rssfeed.title!, link: NSURL(string: rssfeed.link!)!, desc: rssfeed.description)
             
@@ -31,7 +35,6 @@ class XMLParser {
                     let article = Article(source: rssfeed.title!, url: NSURL(string: item.link!)!, date: item.pubDate!, title: item.title!, icon: nil)
                     
                     self.feed!.articles.append(article)
-                    
                 }
                 
                 print(rssfeed.title)
@@ -43,6 +46,8 @@ class XMLParser {
             handler(self.feed)
             
             print("callback - end")
+            
+            // Disable the NetworkActivityIndicator
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         

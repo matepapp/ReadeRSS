@@ -21,5 +21,6 @@ class Feed: NSObject {
         self.name = name
         self.link = link
         self.desc = desc
+        self.category = .Animals
     }
 }
