@@ -108,10 +108,10 @@ class MainTableViewController: UITableViewController {
             
         // Initialize the second section's topics
         case 1:
-            if selectedIndex != nil {
+            if let selectedIndex = selectedIndex {
                 // My most disgusting if condition ever
-                if calculateSelectedIndexPaths(indexPath).contains(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)) {
-                    cell.configureCell(UIImage(named: "placeholder_icon"), title: selectedFeeds![selectedIndex!.row].name!, number: Int(arc4random_uniform(120) + 1))
+                if calculateSelectedIndexPaths(selectedIndex).contains(indexPath) {
+                    cell.configureCell(UIImage(named: "placeholder_icon"), title: selectedFeeds![indexPath.row - selectedIndex.row - 1].name!, number: Int(arc4random_uniform(120) + 1))
                 } else {
                     cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: Int(arc4random_uniform(120) + 1))
                     cell.accessoryType = UITableViewCellAccessoryType.None
@@ -134,8 +134,7 @@ class MainTableViewController: UITableViewController {
             if indexPath.section == 1 {
                 // Insert as many rows as we need
                 insertRows(indexPath)
-            }
-            else {
+            } else {
                 self.performSegueWithIdentifier("ListTableView", sender: indexPath)
             }
         }
@@ -148,7 +147,7 @@ class MainTableViewController: UITableViewController {
             
         // There is another row selected
         else {
-            if calculateSelectedIndexPaths(indexPath).contains(NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)) || indexPath.section == 0 {
+            if calculateSelectedIndexPaths(selectedIndex!).contains(indexPath) || indexPath.section == 0 {
                 self.performSegueWithIdentifier("ListTableView", sender: indexPath)
             }
             else {
@@ -190,12 +189,11 @@ class MainTableViewController: UITableViewController {
         
         tableView.beginUpdates()
         tableView.deleteRowsAtIndexPaths(calculateSelectedIndexPaths(selectedIndex), withRowAnimation: .Fade)
-        tableView.endUpdates()
-        
-        
         // Restore the selected variables because nothing is selected
         self.selectedIndex = nil
         self.selectedFeeds = nil
+        tableView.endUpdates()
+
     }
     
     func selectFeedsFromCategory(cat: Category) -> [Feed]? {
@@ -207,8 +205,8 @@ class MainTableViewController: UITableViewController {
     func calculateSelectedIndexPaths(index: NSIndexPath) -> [NSIndexPath] {
         var indexes = [NSIndexPath]()
 
-        for num in 1 ... (selectedFeeds?.count ?? 0) {
-            indexes.append(NSIndexPath(forRow: (index.row + num), inSection: 1))
+        for num in 0 ..< (selectedFeeds?.count ?? 0) {
+            indexes.append(NSIndexPath(forRow: (index.row + num + 1), inSection: 1))
         }
  
         return indexes
