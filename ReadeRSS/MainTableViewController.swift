@@ -157,11 +157,18 @@ class MainTableViewController: UITableViewController {
                 self.performSegueWithIdentifier("ListTableView", sender: indexPath)
             }
             else {
-                // Delete the previously inserted rows to collapse the other topic
-                deleteRows()
-                
-                // Insert new rows to the freshly selected topic
-                insertRows(indexPath)
+                if let offset = selectedFeeds?.count {
+                    // Delete the previously inserted rows to collapse the other topic
+                    deleteRows()
+                    
+                    // Insert new rows to the freshly selected topic
+                    if indexPath.row - offset < 0 {
+                        insertRows(indexPath)
+                    }
+                    else {
+                        insertRows(NSIndexPath(forRow: indexPath.row - offset, inSection: indexPath.section))
+                    }
+                }
             }
 
         }
@@ -182,7 +189,7 @@ class MainTableViewController: UITableViewController {
         
         // Insert the rows to the selected indexPaths
         tableView.beginUpdates()
-        tableView.insertRowsAtIndexPaths(calculateSelectedIndexPaths(selectedIndex), withRowAnimation: .Fade)
+        tableView.insertRowsAtIndexPaths(calculateSelectedIndexPaths(selectedIndex), withRowAnimation: UITableViewRowAnimation.Top)
         tableView.endUpdates()
     }
     
@@ -194,7 +201,7 @@ class MainTableViewController: UITableViewController {
         // Delete the rows from the previously selected topic
         
         tableView.beginUpdates()
-        tableView.deleteRowsAtIndexPaths(calculateSelectedIndexPaths(selectedIndex), withRowAnimation: .Fade)
+        tableView.deleteRowsAtIndexPaths(calculateSelectedIndexPaths(selectedIndex), withRowAnimation: UITableViewRowAnimation.Top)
         // Restore the selected variables because nothing is selected
         self.selectedIndex = nil
         self.selectedFeeds = nil
