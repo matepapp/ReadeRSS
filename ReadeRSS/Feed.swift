@@ -21,6 +21,15 @@ class Feed: NSObject {
         self.name = name
         self.link = link
         self.desc = desc
-        self.category = .Animals
+        randomCategory()
+    }
+    
+    func randomCategory() {
+        let num = Int(arc4random_uniform(120) + 1)
+        if num  % 2 == 0 {
+           self.category = .Animals
+        } else {
+            self.category = .Art
+        }
     }
 }
