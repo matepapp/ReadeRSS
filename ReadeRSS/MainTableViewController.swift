@@ -12,8 +12,11 @@ class MainTableViewController: UITableViewController {
     var menuItems = ["All", "Unread", "Saved"]
     var topics = Category.allValues
     var feeds = [Feed]()
+    
     var urls = [NSURL(string: "http://www.theverge.com/apple/rss/index.xml"), NSURL(string: "http://www.economist.com/rss/"), NSURL(string: "http://feeds.feedburner.com/techcrunch"), NSURL(string: "http://lifehacker.com/index.xml"), NSURL(string: "http://imagazin.hu/feed/"), NSURL(string: "http://index.hu/24ora/rss/"), NSURL(string: "https://github.com/matepapp.atom")]
+    
     var selectedIndex: NSIndexPath?
+    var selectedFeeds: [Feed]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,35 +128,70 @@ class MainTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if selectedIndex == indexPath {
-            // TODO: remove rows because it means to close to topic
-            selectedIndex = nil
+        // If there is no row selected, select one
+        if selectedIndex == nil {
+            // Insert as many rows as we need
+            insertRows(indexPath)
         }
         
-        if selectedIndex == nil {
-            selectedIndex = indexPath
-            
-            var selectedFeeds = selectFeedsFromCategory(topics[indexPath.row]) ?? [Feed]()
-            
-            var numberOfFeeds = selectedFeeds.count
-            
-            var indexes = [NSIndexPath]()
-            
-            for num in 0 ..< numberOfFeeds {
-                indexes.append(NSIndexPath(forRow: indexPath.row + num, inSection: 1))
-            }
-            
-            tableView.beginUpdates()
-            tableView.insertRowsAtIndexPaths(indexes, withRowAnimation: .Fade)
-            tableView.endUpdates()
-            
+        // If there is a row selected and we want to select that one again
+        else if selectedIndex == indexPath {
+            // Delete the previously inserted rows to collapse the topic
+            deleteRows()
         }
+        
+        // There is another row selected 
+        else {
+            // Delete the previously inserted rows to collapse the other topic
+            deleteRows()
+            
+            // Insert new rows to the freshly selected topic
+            insertRows(indexPath)
+        }
+        
+        
+    }
+
+    // An insertion function which insert as many rows as we need from the index
+    func insertRows(index: NSIndexPath) {
+        // The selected index will be the indexPath
+        selectedIndex = index
+        
+        // Calculate the selected feeds depending on the selected index
+        selectedFeeds = selectFeedsFromCategory(topics[selectedIndex.row]) ?? [Feed]()
+        
+        // Insert the rows to the selected indexPaths
+        tableView.beginUpdates()
+        tableView.insertRowsAtIndexPaths(calculateSelectedIndexPaths(selectedIndex), withRowAnimation: .Fade)
+        tableView.endUpdates()
+    }
+    
+    // A delete function which is delete the previously inserted rows
+    func deleteRows() {
+        // Delete the rows from the previously selected topic
+        tableView.beginUpdates()
+        tableView.deleteRowsAtIndexPaths(calculateSelectedIndexPaths(selectedIndex), withRowAnimation: .Fade)
+        tableView.endUpdates()
+        
+        // Restore the selected variables because nothing is selected
+        selectedIndex = nil
+        selectedFeeds = nil
     }
     
     func selectFeedsFromCategory(cat: Category) -> [Feed]? {
         return feeds.filter({ (feed) -> Bool in
             return feed.category == cat
         })
+    }
+    
+    func calculateSelectedIndexPaths(index: NSIndexPath) -> [NSIndexpath]? {
+        var indexes = [NSIndexPath]()
+        
+        for num in 0 ..< selectedFeeds?.count {
+            indexes.append(NSIndexPath(forRow: (indexPath.row + num), inSection: 1))
+        }
+
+        return indexes
     }
     
     // MARK: - Navigation
