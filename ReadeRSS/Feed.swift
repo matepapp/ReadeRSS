@@ -27,9 +27,9 @@ class Feed: NSObject {
     func randomCategory() {
         let num = Int(arc4random_uniform(120) + 1)
         if num  % 2 == 0 {
-           self.category = .Animals
+           self.category = Category.Business
         } else {
-            self.category = .Art
+            self.category = Category.Art
         }
     }
 }

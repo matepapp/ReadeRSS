@@ -113,8 +113,14 @@ class MainTableViewController: UITableViewController {
                 if calculateSelectedIndexPaths(selectedIndex).contains(indexPath) {
                     cell.configureCell(UIImage(named: "placeholder_icon"), title: selectedFeeds![indexPath.row - selectedIndex.row - 1].name!, number: Int(arc4random_uniform(120) + 1))
                 } else {
-                    cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: Int(arc4random_uniform(120) + 1))
-                    cell.accessoryType = UITableViewCellAccessoryType.None
+                    let num = indexPath.row - selectedFeeds!.count
+                    if num < 0 {
+                        cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: Int(arc4random_uniform(120) + 1))
+                    }
+                    else {
+                        cell.configureCell(UIImage(named: "down"), title: "\(topics[num])", number: Int(arc4random_uniform(120) + 1))
+                    }
+                    
                 }
             } else {
                 cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: Int(arc4random_uniform(120) + 1))
