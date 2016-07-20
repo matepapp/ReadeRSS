@@ -15,6 +15,8 @@ class MainTableViewController: UITableViewController {
     var topics = Category.allValues
     var feeds = [Feed]()
     
+    var urlFeeds: [(NSURL, Category)]?
+    
     var urls = [NSURL(string: "http://www.theverge.com/apple/rss/index.xml"), NSURL(string: "http://www.economist.com/rss/"), NSURL(string: "http://feeds.feedburner.com/techcrunch"), NSURL(string: "http://lifehacker.com/index.xml"), NSURL(string: "http://imagazin.hu/feed/"), NSURL(string: "http://index.hu/24ora/rss/"), NSURL(string: "https://github.com/matepapp.atom")]
     
     var selectedIndex: NSIndexPath? = nil
@@ -24,6 +26,7 @@ class MainTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         // Remove the text from the back button
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)

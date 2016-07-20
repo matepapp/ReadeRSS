@@ -1,5 +1,5 @@
 //
-//  Categhory.swift
+//  Category.swift
 //  ReadeRSS
 //
 //  Created by Mate Papp on 18/07/16.
