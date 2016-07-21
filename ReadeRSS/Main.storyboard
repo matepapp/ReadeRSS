@@ -37,6 +37,10 @@
                                             <constraint firstAttribute="width" constant="300" id="IuA-IW-R4x"/>
                                             <constraint firstAttribute="height" constant="220" id="oeN-T3-OIk"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="VUs-aY-IUs" id="Fkb-TH-mSh"/>
+                                            <outlet property="delegate" destination="VUs-aY-IUs" id="XXn-s4-TOX"/>
+                                        </connections>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLO-aB-gSE">
                                         <rect key="frame" x="60" y="362" width="75" height="30"/>

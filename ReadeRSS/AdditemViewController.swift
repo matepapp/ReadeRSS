@@ -8,21 +8,46 @@
 
 import UIKit
 
-class AdditemViewController: UIViewController {
+class AdditemViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var topicPicker: UIPickerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.topicPicker.dataSource = self
+        self.topicPicker.delegate = self
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+    // MARK: UIPickerViewDataSource
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
     }
     
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if let presetingVC = getPresentingViewController() {
+            return presetingVC.topics.count
+        }
+        
+        else {
+            return 0
+        }
+    }
+    
+    // MARK: UIPickerViewDelegate
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if let presentingVC = getPresentingViewController() {
+            return "\(presentingVC.topics[row])"
+        }
+        
+        else {
+            return nil
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -33,6 +58,13 @@ class AdditemViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func getPresentingViewController() -> MainTableViewController? {
+        let presentingNavController = self.presentingViewController as! UINavigationController
+        let presentingVC = presentingNavController.topViewController as! MainTableViewController
+        
+        return presentingVC
+    }
 
     @IBAction func cancel(sender: AnyObject) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
@@ -40,13 +72,14 @@ class AdditemViewController: UIViewController {
 
     @IBAction func done(sender: AnyObject) {
         if urlTextField.hasText() {
-            let presentingNavController = self.presentingViewController as! UINavigationController
-            let presentingVC = presentingNavController.topViewController as! MainTableViewController
-            presentingVC.urls.append(NSURL(string: urlTextField.text!)!)
             
-            presentingVC.dismissViewControllerAnimated(true, completion: nil)
-            
-            print(presentingVC.urls)
+            if let presetingVC = getPresentingViewController() {
+                presetingVC.urls.append(NSURL(string: urlTextField.text!)!)
+                
+                presetingVC.dismissViewControllerAnimated(true, completion: nil)
+                
+                print(presetingVC.urls)
+            }
         }
     }
 }
