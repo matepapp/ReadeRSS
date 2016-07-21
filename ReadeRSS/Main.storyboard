@@ -31,17 +31,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mJd-mK-wIV">
-                                        <rect key="frame" x="0.0" y="130" width="300" height="220"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="IuA-IW-R4x"/>
-                                            <constraint firstAttribute="height" constant="220" id="oeN-T3-OIk"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dataSource" destination="VUs-aY-IUs" id="Fkb-TH-mSh"/>
-                                            <outlet property="delegate" destination="VUs-aY-IUs" id="XXn-s4-TOX"/>
-                                        </connections>
-                                    </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLO-aB-gSE">
                                         <rect key="frame" x="60" y="362" width="75" height="30"/>
                                         <constraints>
@@ -90,11 +79,21 @@
                                     <constraint firstAttribute="height" constant="450" id="Tjx-h7-Hi8"/>
                                     <constraint firstAttribute="width" constant="300" id="i7Q-PZ-V3U"/>
                                     <constraint firstItem="N1c-Bs-1Rr" firstAttribute="top" secondItem="VUs-aY-IUs" secondAttribute="top" constant="19" id="kvp-KW-7TP"/>
-                                    <constraint firstItem="mJd-mK-wIV" firstAttribute="centerX" secondItem="VUs-aY-IUs" secondAttribute="centerX" id="qEM-qC-Qah"/>
                                     <constraint firstAttribute="bottom" secondItem="P55-qy-jDU" secondAttribute="bottom" constant="58" id="qYo-5f-dfe"/>
-                                    <constraint firstItem="mJd-mK-wIV" firstAttribute="top" secondItem="KER-if-xTE" secondAttribute="bottom" constant="20" id="taL-dP-QeI"/>
                                 </constraints>
                             </view>
+                            <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mJd-mK-wIV">
+                                <rect key="frame" x="37" y="239" width="300" height="220"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="IuA-IW-R4x"/>
+                                    <constraint firstAttribute="height" constant="220" id="oeN-T3-OIk"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="VUs-aY-IUs" id="Fkb-TH-mSh"/>
+                                    <outlet property="delegate" destination="VUs-aY-IUs" id="XXn-s4-TOX"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -109,7 +108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QNN-Lz-YjN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2007.5" y="-271.5"/>
+            <point key="canvasLocation" x="2007.5" y="126.5"/>
         </scene>
         <!--ReadeRSS-->
         <scene sceneID="FDH-wq-fGU">
@@ -373,7 +372,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DBA-hc-D7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1482.5" y="1349.5"/>
+            <point key="canvasLocation" x="1482.5" y="1333.5"/>
         </scene>
         <!--List Table View Controller-->
         <scene sceneID="69u-CW-apv">
@@ -495,7 +494,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqG-Yd-edh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2007.5" y="485.5"/>
+            <point key="canvasLocation" x="2007.5" y="879.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RBx-ox-wdY">

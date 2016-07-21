@@ -39,11 +39,21 @@ class AdditemViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     // MARK: UIPickerViewDelegate
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        if let presentingVC = getPresentingViewController() {
+//            return "\(presentingVC.topics[row])"
+//        }
+//        
+//        else {
+//            return nil
+//        }
+//    }
+    
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         if let presentingVC = getPresentingViewController() {
-            return "\(presentingVC.topics[row])"
+            let titleData = "\(presentingVC.topics[row])"
+            return NSAttributedString(string: titleData, attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
         }
-        
         else {
             return nil
         }
