@@ -9,27 +9,17 @@
 import Foundation
 
 class Feed: NSObject {
-    var name: String?
-    var link: NSURL?
-    var desc: String?
+    var title: String?
+    var url: NSURL?
     var category: Category?
     // TODO: icon
     
     var articles: [Article] = [Article]()
     
-    func setFeed(name: String, link: NSURL, desc: String) {
-        self.name = name
-        self.link = link
-        self.desc = desc
-        randomCategory()
+    init(title: String, url: NSURL, category: Category) {
+        self.title = title
+        self.url = url
+        self.category = category
     }
     
-    func randomCategory() {
-        let num = Int(arc4random_uniform(120) + 1)
-        if num  % 2 == 0 {
-           self.category = Category.Business
-        } else {
-            self.category = Category.Art
-        }
-    }
 }

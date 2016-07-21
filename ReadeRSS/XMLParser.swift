@@ -11,11 +11,10 @@ import Alamofire
 import AlamofireRSSParser
 
 class XMLParser {
-    var feed: Feed? = Feed()
     
-    func parse(url: NSURL, handler: (Feed?) -> Void) {
+    func parse(url: NSURL, category: Category, handler: (Feed?) -> Void) {
         print("function - start")
-        
+        var feed: Feed?
         
         // A GET request to the specified URL
         Alamofire.request(.GET, url).responseRSS() { (response) -> Void in
@@ -28,27 +27,27 @@ class XMLParser {
             // If we get a valid RSSFeed object from the response
             // TODO: Error handling when force unwrapping the values of the feed
             if let rssfeed: RSSFeed = response.result.value {
-                self.feed!.setFeed(rssfeed.title!, link: NSURL(string: rssfeed.link!)!, desc: rssfeed.description)
+                feed = Feed(title: rssfeed.title!, url: NSURL(string: rssfeed.link!)!, category: category)
             
                 // Make a new article from RSSItem and add to the feed
                 for item in rssfeed.items {
                     let article = Article(source: rssfeed.title!, url: NSURL(string: item.link!)!, date: item.pubDate!, title: item.title!, icon: nil)
                     
-                    self.feed!.articles.append(article)
+                    feed!.articles.append(article)
                 }
                 
                 print(rssfeed.title)
             }
             else {
-                self.feed = nil
+                feed = nil
             }
 
-            handler(self.feed)
+            handler(feed)
             
             print("callback - end")
             
             // Disable the NetworkActivityIndicator
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+//            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         
         print("function - return")

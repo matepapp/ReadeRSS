@@ -10,15 +10,11 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     // MARK: Variables
-    
     var menuItems = ["All", "Unread", "Saved"]
     var topics = Category.allValues
+    
     var feeds = [Feed]()
-    
-    var urlFeeds: [(NSURL, Category)]?
-    
-    var urls = [NSURL(string: "http://www.theverge.com/apple/rss/index.xml"), NSURL(string: "http://www.economist.com/rss/"), NSURL(string: "http://feeds.feedburner.com/techcrunch"), NSURL(string: "http://lifehacker.com/index.xml"), NSURL(string: "http://imagazin.hu/feed/"), NSURL(string: "http://index.hu/24ora/rss/"), NSURL(string: "https://github.com/matepapp.atom")]
-    
+
     var selectedIndex: NSIndexPath? = nil
     var selectedFeeds: [Feed]? = nil
     
@@ -26,7 +22,6 @@ class MainTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         
         // Remove the text from the back button
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
@@ -37,21 +32,13 @@ class MainTableViewController: UITableViewController {
     func initializeFeeds() {
         // Setup loading screen.
         
-        for url in urls {
-            // TODO: Error handling
-            XMLParser().parse(url!, handler: { (feedOptional: Feed?) in
-                if let feed = feedOptional {
-                    // We have the data.
-                    // Handle data.
-                    self.feeds.append(feed)
-                    
-                    // Setup normal state.
-                    self.tableView.reloadData()
-                    
-                } else {
-                    // Error happened.
-                }
-            })
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
+        DataHandler.instance.loadFeeds { (feeds) in
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            
+            self.feeds = feeds
+            self.tableView.reloadData()
         }
     }
     
@@ -114,7 +101,7 @@ class MainTableViewController: UITableViewController {
             if let selectedIndex = selectedIndex {
                 // My most disgusting if condition ever
                 if calculateSelectedIndexPaths(selectedIndex).contains(indexPath) {
-                    cell.configureCell(UIImage(named: "placeholder_icon"), title: selectedFeeds![indexPath.row - selectedIndex.row - 1].name!, number: Int(arc4random_uniform(120) + 1))
+                    cell.configureCell(UIImage(named: "placeholder_icon"), title: selectedFeeds![indexPath.row - selectedIndex.row - 1].title!, number: Int(arc4random_uniform(120) + 1))
                 } else {
                     let num = indexPath.row - selectedFeeds!.count
                     if num < 0 {
@@ -250,10 +237,10 @@ class MainTableViewController: UITableViewController {
                 //                    selectedItem = nil
                 //                }
                 
-                selectedItem = feeds[indexPath.row % urls.count]
+                selectedItem = feeds[indexPath.row % 7]
                 
                 // Set the title of the destinationViewController to the selected cell's title
-                destinationViewController.navigationItem.title = selectedItem!.name
+                destinationViewController.navigationItem.title = selectedItem!.title
                 
                 // Pass the feed to the ListViewController and initialize the Sections with it
                 destinationViewController.initializeSections(selectedItem!)

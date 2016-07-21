@@ -28,35 +28,14 @@ class AdditemViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if let presetingVC = getPresentingViewController() {
-            return presetingVC.topics.count
-        }
-        
-        else {
-            return 0
-        }
+        return Category.allValues.count
     }
     
     // MARK: UIPickerViewDelegate
     
-//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        if let presentingVC = getPresentingViewController() {
-//            return "\(presentingVC.topics[row])"
-//        }
-//        
-//        else {
-//            return nil
-//        }
-//    }
-    
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        if let presentingVC = getPresentingViewController() {
-            let titleData = "\(presentingVC.topics[row])"
-            return NSAttributedString(string: titleData, attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
-        }
-        else {
-            return nil
-        }
+        let titleData = "\(Category.allValues[row])"
+        return NSAttributedString(string: titleData, attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
     }
 
     /*
@@ -69,27 +48,18 @@ class AdditemViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     */
     
-    func getPresentingViewController() -> MainTableViewController? {
-        let presentingNavController = self.presentingViewController as! UINavigationController
-        let presentingVC = presentingNavController.topViewController as! MainTableViewController
-        
-        return presentingVC
-    }
 
     @IBAction func cancel(sender: AnyObject) {
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func done(sender: AnyObject) {
         if urlTextField.hasText() {
+            DataHandler.instance.addFeed(NSURL(string: urlTextField.text!)!, category: Category.allValues[topicPicker.selectedRowInComponent(0)])
             
-            if let presetingVC = getPresentingViewController() {
-                presetingVC.urls.append(NSURL(string: urlTextField.text!)!)
-                
-                presetingVC.dismissViewControllerAnimated(true, completion: nil)
-                
-                print(presetingVC.urls)
-            }
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+            print(DataHandler.instance.urlFeeds)
         }
     }
 }
