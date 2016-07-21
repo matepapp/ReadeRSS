@@ -259,5 +259,10 @@ class MainTableViewController: UITableViewController {
                 destinationViewController.initializeSections(selectedItem!)
             }
         }
+        
+        if segue.identifier == "addNewRSS" {
+            let destinationViewController = segue.destinationViewController as! AdditemViewController
+            destinationViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+        }
     }
 }

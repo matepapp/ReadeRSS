@@ -7,6 +7,106 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Additem View Controller-->
+        <scene sceneID="bN8-zS-Fbj">
+            <objects>
+                <viewController id="4kv-fs-WId" customClass="AdditemViewController" customModule="ReadeRSS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hz8-1v-uyN"/>
+                        <viewControllerLayoutGuide type="bottom" id="JQ6-yw-c1Z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0LY-4i-ypf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUs-aY-IUs">
+                                <rect key="frame" x="37" y="109" width="300" height="450"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KER-if-xTE">
+                                        <rect key="frame" x="60" y="80" width="180" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="cIb-du-SEa"/>
+                                            <constraint firstAttribute="width" constant="180" id="mcF-Y8-UxQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mJd-mK-wIV">
+                                        <rect key="frame" x="0.0" y="130" width="300" height="220"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="IuA-IW-R4x"/>
+                                            <constraint firstAttribute="height" constant="220" id="oeN-T3-OIk"/>
+                                        </constraints>
+                                    </pickerView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLO-aB-gSE">
+                                        <rect key="frame" x="60" y="362" width="75" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="5WI-7R-YE8"/>
+                                            <constraint firstAttribute="width" constant="75" id="enn-cJ-iaT"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancel:" destination="4kv-fs-WId" eventType="touchUpInside" id="ox5-mv-dZg"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add new RSS Feed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1c-Bs-1Rr">
+                                        <rect key="frame" x="50" y="19" width="200" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="GTQ-pg-EZ9"/>
+                                            <constraint firstAttribute="height" constant="30" id="kV5-Eg-i99"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P55-qy-jDU">
+                                        <rect key="frame" x="165" y="362" width="75" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="ij9-3r-ziJ"/>
+                                            <constraint firstAttribute="width" constant="75" id="rE9-Yc-csG"/>
+                                        </constraints>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="done:" destination="4kv-fs-WId" eventType="touchUpInside" id="7bI-ba-MNe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.70980392156862748" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="P55-qy-jDU" firstAttribute="trailing" secondItem="KER-if-xTE" secondAttribute="trailing" id="1uq-GE-D0e"/>
+                                    <constraint firstAttribute="bottom" secondItem="iLO-aB-gSE" secondAttribute="bottom" constant="58" id="4tX-lT-RHe"/>
+                                    <constraint firstItem="N1c-Bs-1Rr" firstAttribute="centerX" secondItem="VUs-aY-IUs" secondAttribute="centerX" id="Ccv-2E-2r7"/>
+                                    <constraint firstItem="iLO-aB-gSE" firstAttribute="leading" secondItem="KER-if-xTE" secondAttribute="leading" id="Fwo-fa-dmp"/>
+                                    <constraint firstItem="KER-if-xTE" firstAttribute="top" secondItem="N1c-Bs-1Rr" secondAttribute="bottom" constant="40" id="OC3-bX-28q"/>
+                                    <constraint firstItem="KER-if-xTE" firstAttribute="centerX" secondItem="VUs-aY-IUs" secondAttribute="centerX" id="TTJ-Rx-HPu"/>
+                                    <constraint firstAttribute="height" constant="450" id="Tjx-h7-Hi8"/>
+                                    <constraint firstAttribute="width" constant="300" id="i7Q-PZ-V3U"/>
+                                    <constraint firstItem="N1c-Bs-1Rr" firstAttribute="top" secondItem="VUs-aY-IUs" secondAttribute="top" constant="19" id="kvp-KW-7TP"/>
+                                    <constraint firstItem="mJd-mK-wIV" firstAttribute="centerX" secondItem="VUs-aY-IUs" secondAttribute="centerX" id="qEM-qC-Qah"/>
+                                    <constraint firstAttribute="bottom" secondItem="P55-qy-jDU" secondAttribute="bottom" constant="58" id="qYo-5f-dfe"/>
+                                    <constraint firstItem="mJd-mK-wIV" firstAttribute="top" secondItem="KER-if-xTE" secondAttribute="bottom" constant="20" id="taL-dP-QeI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VUs-aY-IUs" firstAttribute="centerY" secondItem="0LY-4i-ypf" secondAttribute="centerY" id="CQN-dQ-b4w"/>
+                            <constraint firstItem="VUs-aY-IUs" firstAttribute="centerX" secondItem="0LY-4i-ypf" secondAttribute="centerX" id="klI-Lw-nFE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="topicPicker" destination="mJd-mK-wIV" id="zQn-k8-cwo"/>
+                        <outlet property="urlTextField" destination="KER-if-xTE" id="Yay-Mu-S1o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QNN-Lz-YjN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2007.5" y="-271.5"/>
+        </scene>
         <!--ReadeRSS-->
         <scene sceneID="FDH-wq-fGU">
             <objects>
@@ -86,7 +186,11 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="dg0-WD-xOd"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="dg0-WD-xOd">
+                            <connections>
+                                <segue destination="4kv-fs-WId" kind="presentation" identifier="addNewRSS" modalTransitionStyle="coverVertical" id="yvX-WJ-ehO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -398,7 +502,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.70826900005340576" blue="0.65405279397964478" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.70980392156862748" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
