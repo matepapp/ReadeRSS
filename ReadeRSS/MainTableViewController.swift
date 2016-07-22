@@ -8,6 +8,8 @@
 
 import UIKit
 
+let dataChangedNotification = "dataChanged"
+
 class MainTableViewController: UITableViewController {
     // MARK: Variables
     var menuItems = ["All", "Unread", "Saved"]
@@ -27,6 +29,8 @@ class MainTableViewController: UITableViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
         initializeFeeds()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "initializeFeeds", name: dataChangedNotification, object: nil)
     }
     
     func initializeFeeds() {
@@ -50,15 +54,21 @@ class MainTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return menuItems.count
-            
-        case 1:
-            return topics.count + (selectedFeeds?.count ?? 0)
-        default:
+        if feeds.count == 0 {
             return 0
         }
+        else {
+            switch section {
+            case 0:
+                return menuItems.count
+                
+            case 1:
+                return topics.count + (selectedFeeds?.count ?? 0)
+            default:
+                return 0
+            }
+        }
+
     }
     
     override func tableView(tableView: UITableView,

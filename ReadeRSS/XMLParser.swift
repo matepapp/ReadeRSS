@@ -20,9 +20,6 @@ class XMLParser {
         Alamofire.request(.GET, url).responseRSS() { (response) -> Void in
             
             print("callback - start")
-            // Show a NetworkActivityIndicator
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-            
             
             // If we get a valid RSSFeed object from the response
             // TODO: Error handling when force unwrapping the values of the feed
@@ -46,8 +43,6 @@ class XMLParser {
             
             print("callback - end")
             
-            // Disable the NetworkActivityIndicator
-//            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         
         print("function - return")

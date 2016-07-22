@@ -56,6 +56,6 @@ class DataHandler {
     func addFeed(url: NSURL, category: Category) {
         urlFeeds.append((url, category))
         
-        // TODO: NSNotif
+        NSNotificationCenter.defaultCenter().postNotificationName(dataChangedNotification, object: self)
     }
 }
