@@ -38,7 +38,9 @@ class MainTableViewController: UITableViewController {
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        DataHandler.instance.loadFeeds { (feeds) in
+        DataHandler.instance.loadStoredFeeds()
+        
+        DataHandler.instance.parseFeeds { (feeds) in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
             self.feeds = feeds

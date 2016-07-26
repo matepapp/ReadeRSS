@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReadeRSS/MainTableViewController.swift"
-            timestampString = "490868740.052346"
+            timestampString = "491231637.233943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "initializeFeeds()"
             landmarkType = "5">
          </BreakpointContent>

@@ -55,11 +55,11 @@ class AdditemViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 
     @IBAction func done(sender: AnyObject) {
         if urlTextField.hasText() {
-            DataHandler.instance.addFeed(NSURL(string: urlTextField.text!)!, category: Category.allValues[topicPicker.selectedRowInComponent(0)])
+            DataHandler.instance.addFeed(NSURL(string: urlTextField.text!)!, cat: Category.allValues[topicPicker.selectedRowInComponent(0)])
             
             self.dismissViewControllerAnimated(true, completion: nil)
             
-            print(DataHandler.instance.urlFeeds)
+            print(DataHandler.instance.storedFeeds)
         }
     }
 }
