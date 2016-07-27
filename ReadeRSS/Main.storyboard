@@ -82,7 +82,7 @@
                                     <constraint firstAttribute="bottom" secondItem="P55-qy-jDU" secondAttribute="bottom" constant="58" id="qYo-5f-dfe"/>
                                 </constraints>
                             </view>
-                            <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mJd-mK-wIV">
+                            <pickerView hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mJd-mK-wIV">
                                 <rect key="frame" x="37" y="239" width="300" height="220"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -94,14 +94,29 @@
                                     <outlet property="delegate" destination="VUs-aY-IUs" id="XXn-s4-TOX"/>
                                 </connections>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BP-I0-NKS">
+                                <rect key="frame" x="85" y="303" width="205" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="205" id="F1p-HM-eWj"/>
+                                    <constraint firstAttribute="height" constant="61" id="WKf-KS-L63"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Select a category"/>
+                                <connections>
+                                    <action selector="selectCategory:" destination="4kv-fs-WId" eventType="touchUpInside" id="1mr-Fn-kGs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="1BP-I0-NKS" firstAttribute="centerX" secondItem="0LY-4i-ypf" secondAttribute="centerX" id="C50-U9-6jm"/>
                             <constraint firstItem="VUs-aY-IUs" firstAttribute="centerY" secondItem="0LY-4i-ypf" secondAttribute="centerY" id="CQN-dQ-b4w"/>
+                            <constraint firstItem="1BP-I0-NKS" firstAttribute="top" secondItem="hz8-1v-uyN" secondAttribute="bottom" constant="283" id="O48-8S-a3r"/>
                             <constraint firstItem="VUs-aY-IUs" firstAttribute="centerX" secondItem="0LY-4i-ypf" secondAttribute="centerX" id="klI-Lw-nFE"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="categoryBtn" destination="1BP-I0-NKS" id="5uf-0o-5a8"/>
                         <outlet property="topicPicker" destination="mJd-mK-wIV" id="zQn-k8-cwo"/>
                         <outlet property="urlTextField" destination="KER-if-xTE" id="Yay-Mu-S1o"/>
                     </connections>

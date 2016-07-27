@@ -11,6 +11,7 @@ import UIKit
 class AdditemViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var topicPicker: UIPickerView!
+    @IBOutlet weak var categoryBtn: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,11 @@ class AdditemViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // Pass the selected object to the new view controller.
     }
     */
-    
+
+    @IBAction func selectCategory(sender: AnyObject) {
+        categoryBtn.hidden = true
+        topicPicker.hidden = false
+    }
 
     @IBAction func cancel(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
