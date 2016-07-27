@@ -85,8 +85,9 @@ class ListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        sections[indexPath.section].articles[indexPath.row].unread = false
         
-        // Initialize a SafariViewController with the selected row's URL 
+        // Initialize a SafariViewController with the selected row's URL
         let articleVC = ArticleSafariViewController(URL: sections[indexPath.section].articles[indexPath.row].url, entersReaderIfAvailable: true)
         self.presentViewController(articleVC, animated: true, completion: nil)
     }

@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 
 class Article: NSObject {
-    var source: String
-    var url: NSURL
-    var date: NSDate
-    var title: String
+    let source: String
+    let url: NSURL
+    let date: NSDate
+    let title: String
+    var unread: Bool = true
     var icon: UIImage?
     
     init(source: String, url: NSURL, date: NSDate, title: String, icon: UIImage?) {

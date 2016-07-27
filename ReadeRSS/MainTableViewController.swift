@@ -98,34 +98,34 @@ class MainTableViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                cell.configureCell(UIImage(named: "all")!, title: menuItems[indexPath.row], number: Int(arc4random_uniform(120) + 1))
+                cell.configureCell(UIImage(named: "all")!, title: menuItems[indexPath.row], number: calculateArticles())
                 
             case 1:
-                cell.configureCell(UIImage(named: "unread")!, title: menuItems[indexPath.row], number: Int(arc4random_uniform(120) + 1))
+                cell.configureCell(UIImage(named: "unread")!, title: menuItems[indexPath.row], number: calculateAllUnreadArticles())
                 
             case 2: fallthrough
             default:
-                cell.configureCell(UIImage(named: "saved")!, title: menuItems[indexPath.row], number: Int(arc4random_uniform(120) + 1))
+                cell.configureCell(UIImage(named: "saved")!, title: menuItems[indexPath.row], number: 0)
             }
             
         // Initialize the second section's topics
         case 1:
             if let selectedIndex = selectedIndex {
-                // My most disgusting if condition ever
                 if calculateSelectedIndexPaths(selectedIndex).contains(indexPath) {
-                    cell.configureCell(UIImage(named: "placeholder_icon"), title: selectedFeeds![indexPath.row - selectedIndex.row - 1].title!, number: Int(arc4random_uniform(120) + 1))
+                    cell.configureCell(UIImage(named: "placeholder_icon"), title: selectedFeeds![indexPath.row - selectedIndex.row - 1].title!, number: calculateUnreadArticles(selectedFeeds![indexPath.row - selectedIndex.row - 1]))
+                    cell.accessoryType = UITableViewCellAccessoryType.None
                 } else {
                     let num = indexPath.row - selectedFeeds!.count
                     if num < 0 {
-                        cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: Int(arc4random_uniform(120) + 1))
+                        cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: calculateUnreadArticlesPerCategory(topics[indexPath.row]))
                     }
                     else {
-                        cell.configureCell(UIImage(named: "down"), title: "\(topics[num])", number: Int(arc4random_uniform(120) + 1))
+                        cell.configureCell(UIImage(named: "down"), title: "\(topics[num])", number: calculateUnreadArticlesPerCategory(topics[num]) )
                     }
                     
                 }
             } else {
-                cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: Int(arc4random_uniform(120) + 1))
+                cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: calculateUnreadArticlesPerCategory(topics[indexPath.row]) )
                 cell.accessoryType = UITableViewCellAccessoryType.None
             }
             
@@ -227,6 +227,53 @@ class MainTableViewController: UITableViewController {
         return indexes
     }
     
+    func calculateUnreadArticles(feed: Feed) -> Int {
+        var unreadArticles = 0
+        
+        for article in feed.articles {
+            if article.unread {
+                unreadArticles += 1
+            }
+        }
+        
+        return unreadArticles
+    }
+    
+    func calculateUnreadArticlesPerCategory(category: Category) -> Int {
+        var unreadArticlesPerCategory = 0
+        
+        for feed in feeds {
+            if feed.category == category {
+                unreadArticlesPerCategory += calculateUnreadArticles(feed)
+            }
+        }
+        
+        return unreadArticlesPerCategory
+    }
+    
+    func calculateAllUnreadArticles() -> Int {
+        var unreadArticles = 0
+        
+        for feed in feeds {
+            unreadArticles += calculateUnreadArticles(feed)
+        }
+        
+        return unreadArticles
+    }
+    
+    func calculateArticles() -> Int {
+        var articlesNumber = 0
+        
+        for feed in feeds {
+            for _ in feed.articles {
+                articlesNumber += 1
+            }
+        }
+        
+        return articlesNumber
+    }
+    
+        
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
