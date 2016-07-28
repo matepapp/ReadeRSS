@@ -48,6 +48,8 @@ class AdditemViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: IBActions
 
     @IBAction func selectCategory(sender: AnyObject) {
         categoryBtn.hidden = true

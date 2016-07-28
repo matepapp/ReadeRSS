@@ -13,10 +13,19 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var sourceLbl: UILabel!
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    
+    var unread: Bool = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.bgView.layer.cornerRadius = 8.0
+        self.bgView.layer.masksToBounds = true
+        
+        // Add blur effect to the background
     }
     
     // Configure a cell with an article
@@ -31,6 +40,10 @@ class ListTableViewCell: UITableViewCell {
         timeLbl.text = dateFormatter.stringFromDate(article.date)
         
         titleLbl.text = article.title
+        
+        self.unread = article.unread
     }
+    
+    // TODO: Selected cell differenct color
 
 }
