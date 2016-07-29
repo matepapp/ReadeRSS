@@ -28,6 +28,24 @@ class ListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set the background image
+        let bgImageView = UIImageView(image: UIImage(named: "background")!)
+        bgImageView.contentMode = .ScaleAspectFill
+        self.tableView.backgroundView = bgImageView
+        
+        // Hide the navigation bar when the user scrolls
+        self.navigationController?.hidesBarsOnSwipe = true
+        
+        // Customize the navigationbar
+        let navBar = self.navigationController?.navigationBar
+        if let navigationBar = navBar {
+            navigationBar.backgroundColor = UIColor.clearColor()
+        }
+    }
+    
     func initializeSections(feed: Feed) {
         // Initialize a calendar instance
         let calendar = NSCalendar.currentCalendar()

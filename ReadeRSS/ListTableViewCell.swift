@@ -22,16 +22,29 @@ class ListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        self.bgView.layer.cornerRadius = 8.0
+        // Add blur effect
+        let lightBlur = UIBlurEffect(style: .Light)
+        let lightBlurView = UIVisualEffectView(effect: lightBlur)
+        
+        lightBlurView.frame = bgView.frame
+        self.contentView.addSubview(lightBlurView)
+        
+        // Make the cell rounded
+        self.bgView.layer.cornerRadius = 10.0
         self.bgView.layer.masksToBounds = true
         
-        // Add blur effect to the background
+        // Add the blur effect to the cell
+        let vibrancy = UIVibrancyEffect(forBlurEffect: lightBlur)
+        let vibrancyView = UIVisualEffectView(effect: vibrancy)
+        lightBlurView.contentView.addSubview(vibrancyView)
+        lightBlurView.contentView.addSubview(bgView)
+        
     }
     
     // Configure a cell with an article
     func configureCell(article: Article) {
         sourceIconImg.image = article.icon
-        sourceLbl.text = article.source
+        sourceLbl.text = article.source.uppercaseString
         
         // Format the date
         let dateFormatter = NSDateFormatter()
@@ -44,6 +57,6 @@ class ListTableViewCell: UITableViewCell {
         self.unread = article.unread
     }
     
-    // TODO: Selected cell differenct color
+    // TODO: Selected cell different color
 
 }
