@@ -13,32 +13,19 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var sourceLbl: UILabel!
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var bgView: UIView!
-    @IBOutlet weak var headerView: UIView!
-    
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+
     var unread: Bool = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        // Add blur effect
-        let lightBlur = UIBlurEffect(style: .Light)
-        let lightBlurView = UIVisualEffectView(effect: lightBlur)
-        
-        lightBlurView.frame = bgView.frame
-        self.contentView.addSubview(lightBlurView)
         
         // Make the cell rounded
-        self.bgView.layer.cornerRadius = 10.0
-        self.bgView.layer.masksToBounds = true
-        
-        // Add the blur effect to the cell
-        let vibrancy = UIVibrancyEffect(forBlurEffect: lightBlur)
-        let vibrancyView = UIVisualEffectView(effect: vibrancy)
-        lightBlurView.contentView.addSubview(vibrancyView)
-        lightBlurView.contentView.addSubview(bgView)
-        
+        visualEffectView.layer.cornerRadius = 9.0
+        visualEffectView.clipsToBounds = true
+
     }
     
     // Configure a cell with an article
@@ -55,6 +42,8 @@ class ListTableViewCell: UITableViewCell {
         titleLbl.text = article.title
         
         self.unread = article.unread
+        
+        layoutIfNeeded()
     }
     
     // TODO: Selected cell different color

@@ -38,12 +38,6 @@ class ListTableViewController: UITableViewController {
         
         // Hide the navigation bar when the user scrolls
         self.navigationController?.hidesBarsOnSwipe = true
-        
-        // Customize the navigationbar
-        let navBar = self.navigationController?.navigationBar
-        if let navigationBar = navBar {
-            navigationBar.backgroundColor = UIColor.clearColor()
-        }
     }
     
     func initializeSections(feed: Feed) {
@@ -109,6 +103,14 @@ class ListTableViewController: UITableViewController {
         // Initialize a SafariViewController with the selected row's URL
         let articleVC = ArticleSafariViewController(URL: sections[indexPath.section].articles[indexPath.row].url, entersReaderIfAvailable: true)
         self.presentViewController(articleVC, animated: true, completion: nil)
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        
+        header.textLabel?.textColor = UIColor.whiteColor()
+        header.textLabel?.font = UIFont(name: "HelveticaNeue", size: 18.0)
+        
     }
     
 

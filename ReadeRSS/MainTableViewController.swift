@@ -25,8 +25,13 @@ class MainTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Remove the text from the back button
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        // Customize the navigationbar
+        let navBar = self.navigationController?.navigationBar
+        if let navigationBar = navBar {
+            navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+            navigationBar.shadowImage = UIImage()
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        }
         
         initializeFeeds()
         
@@ -46,6 +51,19 @@ class MainTableViewController: UITableViewController {
             self.feeds = feeds
             self.tableView.reloadData()
         }
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set the background image
+        let bgImageView = UIImageView(image: UIImage(named: "background")!)
+        bgImageView.contentMode = .ScaleAspectFill
+        self.tableView.backgroundView = bgImageView
+        
+        // Hide the navigation bar when the user scrolls
+        self.navigationController?.hidesBarsOnSwipe = true
     }
     
     // MARK: - Table view data source
@@ -71,19 +89,6 @@ class MainTableViewController: UITableViewController {
             }
         }
 
-    }
-    
-    override func tableView(tableView: UITableView,
-                            titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "Menu"
-            
-        case 1:
-            return "Topics"
-        default:
-            return nil
-        }
     }
     
     

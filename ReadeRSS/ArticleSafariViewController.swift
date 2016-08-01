@@ -15,7 +15,7 @@ class ArticleSafariViewController: SFSafariViewController, SFSafariViewControlle
         super.viewDidLoad()
 
         // Set the bar tint to match the UI design
-        self.view.tintColor = UIColor(red:0.11, green:0.66, blue:0.59, alpha:1.0)
+        self.view.tintColor = UIColor(red: 0 / 255, green: 67 / 255, blue: 67 / 255, alpha: 1.0)
     }
 
     func safariViewControllerDidFinish(controller: SFSafariViewController) {
