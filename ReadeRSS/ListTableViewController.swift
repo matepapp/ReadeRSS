@@ -32,7 +32,7 @@ class ListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         // Set the background image
-        let bgImageView = UIImageView(image: UIImage(named: "background")!)
+        let bgImageView = UIImageView(image: UIImage(named: "background3")!)
         bgImageView.contentMode = .ScaleAspectFill
         self.tableView.backgroundView = bgImageView
         
@@ -108,8 +108,12 @@ class ListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         
-        header.textLabel?.textColor = UIColor.whiteColor()
-        header.textLabel?.font = UIFont(name: "HelveticaNeue", size: 18.0)
+        if let headerTitle = header.textLabel {
+            headerTitle.textColor = UIColor.whiteColor()
+            headerTitle.font = UIFont(name: "HelveticaNeue-Bold", size: 23.0)
+            headerTitle.text = headerTitle.text?.capitalizedString
+        }
+
         
     }
     
