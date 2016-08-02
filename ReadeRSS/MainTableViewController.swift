@@ -13,46 +13,22 @@ let dataChangedNotification = "dataChanged"
 class MainTableViewController: UITableViewController {
     // MARK: Variables
     var menuItems = ["All", "Unread", "Saved"]
-    var topics = Category.allValues
+    var categories = Category.allValues
     
     var feeds = [Feed]()
 
     var selectedIndex: NSIndexPath? = nil
     var selectedFeeds: [Feed]? = nil
     
-    // MARK: Functions
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
-        
         initializeFeeds()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "initializeFeeds", name: dataChangedNotification, object: nil)
-    }
-    
-    func initializeFeeds() {
-        // Setup loading screen.
-        
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        
-        DataHandler.instance.loadStoredFeeds()
-        
-        DataHandler.instance.parseFeeds { (feeds) in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            
-            self.feeds = feeds
-            self.tableView.reloadData()
-        }
-    }
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         // Set the background image
-        let bgImageView = UIImageView(image: UIImage(named: "background1")!)
+        let bgImageView = UIImageView(image: UIImage(named: "background2")!)
         bgImageView.contentMode = .ScaleAspectFill
         self.tableView.backgroundView = bgImageView
         
@@ -65,120 +41,25 @@ class MainTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Table view data source
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
     }
     
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if feeds.count == 0 {
-            return 0
-        }
-        else {
-            switch section {
-            case 0:
-                return menuItems.count
-                
-            case 1:
-                return topics.count + (selectedFeeds?.count ?? 0)
-            default:
-                return 0
-            }
-        }
-
-    }
+    // MARK: Functions
     
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print("tableview")
+    func initializeFeeds() {
+        // Setup loading screen.
         
-        // Reuse the cells with the identifier mainCell
-        let cell = tableView.dequeueReusableCellWithIdentifier("mainCell", forIndexPath: indexPath) as! MainTableViewCell
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        // Initialize the cells in the first section
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0:
-                cell.configureCell(UIImage(named: "all")!, title: menuItems[indexPath.row], number: calculateArticles())
-                
-            case 1:
-                cell.configureCell(UIImage(named: "unread")!, title: menuItems[indexPath.row], number: calculateAllUnreadArticles())
-                
-            case 2: fallthrough
-            default:
-                cell.configureCell(UIImage(named: "saved")!, title: menuItems[indexPath.row], number: 0)
-            }
+        DataHandler.instance.loadStoredFeeds()
+        DataHandler.instance.parseFeeds { (feeds) in
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             
-        // Initialize the second section's topics
-        case 1:
-            if let selectedIndex = selectedIndex {
-                if calculateSelectedIndexPaths(selectedIndex).contains(indexPath) {
-                    cell.configureCell(UIImage(named: "placeholder_icon"), title: selectedFeeds![indexPath.row - selectedIndex.row - 1].title!, number: calculateUnreadArticles(selectedFeeds![indexPath.row - selectedIndex.row - 1]))
-                    cell.accessoryType = UITableViewCellAccessoryType.None
-                } else {
-                    let num = indexPath.row - selectedFeeds!.count
-                    if num < 0 {
-                        cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: calculateUnreadArticlesPerCategory(topics[indexPath.row]))
-                    }
-                    else {
-                        cell.configureCell(UIImage(named: "down"), title: "\(topics[num])", number: calculateUnreadArticlesPerCategory(topics[num]) )
-                    }
-                    
-                }
-            } else {
-                cell.configureCell(UIImage(named: "down"), title: "\(topics[indexPath.row])", number: calculateUnreadArticlesPerCategory(topics[indexPath.row]) )
-                cell.accessoryType = UITableViewCellAccessoryType.None
-            }
-            
-        default:
-            cell.configureCell(nil, title: "Default", number: 0)
+            self.feeds = feeds
+            self.tableView.reloadData()
         }
-        return cell
-    }
-
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // If there is no row selected, select one
-        if selectedIndex == nil {
-            if indexPath.section == 1 {
-                // Insert as many rows as we need
-                insertRows(indexPath)
-            } else {
-                self.performSegueWithIdentifier("ListTableView", sender: indexPath)
-            }
-        }
-            
-        // If there is a row selected and we want to select that one again
-        else if selectedIndex == indexPath {
-            // Delete the previously inserted rows to collapse the topic
-            deleteRows()
-        }
-            
-        // There is another row selected
-        else {
-            if calculateSelectedIndexPaths(selectedIndex!).contains(indexPath) || indexPath.section == 0 {
-                self.performSegueWithIdentifier("ListTableView", sender: indexPath)
-            }
-            else {
-                if let offset = selectedFeeds?.count {
-                    // Delete the previously inserted rows to collapse the other topic
-                    deleteRows()
-                    
-                    // Insert new rows to the freshly selected topic
-                    if indexPath.row - offset < 0 {
-                        insertRows(indexPath)
-                    }
-                    else {
-                        insertRows(NSIndexPath(forRow: indexPath.row - offset, inSection: indexPath.section))
-                    }
-                }
-            }
-
-        }
-        
     }
     
     // An insertion function which insert as many rows as we need from the index
@@ -191,7 +72,7 @@ class MainTableViewController: UITableViewController {
         }
         
         // Calculate the selected feeds depending on the selected index
-        selectedFeeds = selectFeedsFromCategory(topics[selectedIndex.row]) ?? [Feed]()
+        selectedFeeds = selectFeedsFromCategory(categories[selectedIndex.row]) ?? [Feed]()
         
         // Insert the rows to the selected indexPaths
         tableView.beginUpdates()
@@ -212,7 +93,7 @@ class MainTableViewController: UITableViewController {
         self.selectedIndex = nil
         self.selectedFeeds = nil
         tableView.endUpdates()
-
+        
     }
     
     func selectFeedsFromCategory(cat: Category) -> [Feed]? {
@@ -223,11 +104,11 @@ class MainTableViewController: UITableViewController {
     
     func calculateSelectedIndexPaths(index: NSIndexPath) -> [NSIndexPath] {
         var indexes = [NSIndexPath]()
-
+        
         for num in 0 ..< (selectedFeeds?.count ?? 0) {
             indexes.append(NSIndexPath(forRow: (index.row + num + 1), inSection: 1))
         }
- 
+        
         return indexes
     }
     
@@ -277,6 +158,136 @@ class MainTableViewController: UITableViewController {
         return articlesNumber
     }
     
+
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if feeds.count == 0 {
+            return 0
+        }
+        else {
+            switch section {
+            case 0:
+                return menuItems.count
+                
+            case 1:
+                return categories.count + (selectedFeeds?.count ?? 0)
+            default:
+                return 0
+            }
+        }
+
+    }
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        print("tableview")
+        
+        var reuseID = "PrimaryCell"
+        
+        if indexPath.row == 0 {
+            reuseID = "FirstPrimaryCell"
+        }
+        
+        if (indexPath.section == 0 && indexPath.row == 2) || (indexPath.section == 1 && indexPath.row == (categories.count + (selectedFeeds?.count ?? 0) - 1)) {
+            reuseID = "LastPrimaryCell"
+        }
+        
+        
+        // Reuse the cells with the identifier mainCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseID, forIndexPath: indexPath) as! MainTableViewCell
+        
+        // Initialize the cells in the first section
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                cell.configureCell(UIImage(named: "all")!, title: menuItems[indexPath.row], number: calculateArticles())
+                
+            case 1:
+                cell.configureCell(UIImage(named: "unread")!, title: menuItems[indexPath.row], number: calculateAllUnreadArticles())
+                
+            case 2: fallthrough
+            default:
+                cell.configureCell(UIImage(named: "saved")!, title: menuItems[indexPath.row], number: 0)
+            }
+            
+        // Initialize the second section's categories
+        case 1:
+            if let selectedIndex = selectedIndex {
+                if calculateSelectedIndexPaths(selectedIndex).contains(indexPath) {
+                    cell.configureCell(UIImage(named: "placeholder_icon"), title: selectedFeeds![indexPath.row - selectedIndex.row - 1].title!, number: calculateUnreadArticles(selectedFeeds![indexPath.row - selectedIndex.row - 1]))
+                    cell.accessoryType = UITableViewCellAccessoryType.None
+                } else {
+                    let num = indexPath.row - selectedFeeds!.count
+                    if num < 0 {
+                        cell.configureCell(UIImage(named: "down"), title: "\(categories[indexPath.row])", number: calculateUnreadArticlesPerCategory(categories[indexPath.row]))
+                    }
+                    else {
+                        cell.configureCell(UIImage(named: "down"), title: "\(categories[num])", number: calculateUnreadArticlesPerCategory(categories[num]) )
+                    }
+                    
+                }
+            } else {
+                cell.configureCell(UIImage(named: "down"), title: "\(categories[indexPath.row])", number: calculateUnreadArticlesPerCategory(categories[indexPath.row]) )
+                cell.accessoryType = UITableViewCellAccessoryType.None
+            }
+            
+        default:
+            break
+        }
+        return cell
+    }
+
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // If there is no row selected, select one
+        if selectedIndex == nil {
+            if indexPath.section == 1 {
+                // Insert as many rows as we need
+                insertRows(indexPath)
+            } else {
+                self.performSegueWithIdentifier("ListTableView", sender: indexPath)
+            }
+        }
+            
+        // If there is a row selected and we want to select that one again
+        else if selectedIndex == indexPath {
+            // Delete the previously inserted rows to collapse the topic
+            deleteRows()
+        }
+            
+        // There is another row selected
+        else {
+            if calculateSelectedIndexPaths(selectedIndex!).contains(indexPath) || indexPath.section == 0 {
+                self.performSegueWithIdentifier("ListTableView", sender: indexPath)
+            }
+            else {
+                if let offset = selectedFeeds?.count {
+                    // Delete the previously inserted rows to collapse the other topic
+                    deleteRows()
+                    
+                    // Insert new rows to the freshly selected topic
+                    if indexPath.row - offset < 0 {
+                        insertRows(indexPath)
+                    }
+                    else {
+                        insertRows(NSIndexPath(forRow: indexPath.row - offset, inSection: indexPath.section))
+                    }
+                }
+            }
+
+        }
+        
+    }
+    
+    
+    
         
     // MARK: - Navigation
     
@@ -294,7 +305,7 @@ class MainTableViewController: UITableViewController {
                 //                    selectedItem = menuItems[indexPath.row]
                 //
                 //                case 1:
-                //                    selectedItem = topics[indexPath.row]
+                //                    selectedItem = categories[indexPath.row]
                 //
                 //                default:
                 //                    selectedItem = nil

@@ -41,6 +41,6 @@ class Feed: NSObject, NSCoding {
                 return cat
             }
         }
-        return Category.Animals
+        return nil
     }
 }

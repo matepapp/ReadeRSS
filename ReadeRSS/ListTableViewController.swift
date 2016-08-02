@@ -36,8 +36,7 @@ class ListTableViewController: UITableViewController {
         bgImageView.contentMode = .ScaleAspectFill
         self.tableView.backgroundView = bgImageView
         
-        // Hide the navigation bar when the user scrolls
-        self.navigationController?.hidesBarsOnSwipe = true
+        self.tableView.reloadData()
     }
     
     func initializeSections(feed: Feed) {
@@ -117,5 +116,15 @@ class ListTableViewController: UITableViewController {
         
     }
     
+    // MARK: IBActions
+    
+//    @IBAction func longPressed(sender: AnyObject) {
+//        if let cell = sender as? ListTableViewCell {
+//            cell.saved = true
+//            self.tableView.reloadData()
+//        }
+//        
+//        print("Gesture recognized")
+//    }
 
 }

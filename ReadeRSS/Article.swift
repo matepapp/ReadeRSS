@@ -15,6 +15,7 @@ class Article: NSObject {
     let date: NSDate
     let title: String
     var unread: Bool = true
+    var saved: Bool = false
     var icon: UIImage?
     
     init(source: String, url: NSURL, date: NSDate, title: String, icon: UIImage?) {
