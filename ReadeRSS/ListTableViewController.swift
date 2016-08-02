@@ -32,7 +32,7 @@ class ListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         // Set the background image
-        let bgImageView = UIImageView(image: UIImage(named: "background3")!)
+        let bgImageView = UIImageView(image: UIImage(named: "background2")!)
         bgImageView.contentMode = .ScaleAspectFill
         self.tableView.backgroundView = bgImageView
         
