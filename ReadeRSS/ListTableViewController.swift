@@ -15,7 +15,7 @@ class ListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Set the self-sizing cells
-        self.tableView.estimatedRowHeight = 150.0
+        self.tableView.estimatedRowHeight = 120.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         // Remove the text from the back button
@@ -32,7 +32,7 @@ class ListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         // Set the background image
-        let bgImageView = UIImageView(image: UIImage(named: "background2")!)
+        let bgImageView = UIImageView(image: UIImage(named: "background1")!)
         bgImageView.contentMode = .ScaleAspectFill
         self.tableView.backgroundView = bgImageView
         
@@ -113,18 +113,6 @@ class ListTableViewController: UITableViewController {
             headerTitle.text = headerTitle.text?.capitalizedString
         }
 
-        
     }
-    
-    // MARK: IBActions
-    
-//    @IBAction func longPressed(sender: AnyObject) {
-//        if let cell = sender as? ListTableViewCell {
-//            cell.saved = true
-//            self.tableView.reloadData()
-//        }
-//        
-//        print("Gesture recognized")
-//    }
 
 }
